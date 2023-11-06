@@ -1,0 +1,49 @@
+a {
+  /* text-decoration : none; */
+  color: gray;
+  margin: 12px;
+  display: block;
+}
+* {
+  margin: 0;
+  box-sizing: border-box;
+
+  color: white;
+}
+.hover {
+  transition: transform 1500ms;
+}
+.hover:hover {
+  transform: scale(1.08);
+}
+
+.ov {
+  display: flex;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  padding: 20px;
+}
+.ov::-webkit-scrollbar {
+  display: none;
+}
+.im {
+  object-fit: contain;
+  width: 100%;
+  max-height: 100px;
+  margin-right: 10px;
+  transition: transform 450ms;
+}
+
+.im:hover {
+  transform: scale(1.08);
+}
+
+.row_larger {
+  max-height: 250px;
+  width: 100%;
+}
+.row_larger:hover {
+  max-height: 250px;
+  width: 100%;
+  transform: scale(1.09);
+}

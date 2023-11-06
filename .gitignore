@@ -1,0 +1,5 @@
+node_modules
+config
+documentation
+frontend/node_modules
+frontend/.env 
