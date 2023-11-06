@@ -71,7 +71,7 @@ export const Heroes = () => {
           Adaptable sur tout type d'appareil, mobile, tablette, Tv, ordinateur, 
         </p>
         <p style={{ zIndex: "2" }}>
-          <form onSubmit={handleSubmit}>
+          {/* <form onSubmit={handleSubmit}>
             <InputText
               className="w-12 text-center  m:12 h-2 "
               placeholder="Email adress"
@@ -79,13 +79,14 @@ export const Heroes = () => {
               value={emailLocal}
               onChange={handleEmailChange}
             />
-            <Button
-              type="submit"
-              style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
-              className="w-12 text-sm md:text-lg mt-4 h-2 "
-              label="Commencer l'inscription"
-            />
-          </form>
+          </form> */}
+          <Button
+            type="submit"
+            onClick={() => history("/register")}
+            style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
+            className="w-12 text-sm md:text-lg mt-4 h-2 "
+            label="Commencer l'inscription"
+          />
         </p>
       </div>
       <div

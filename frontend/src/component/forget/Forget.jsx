@@ -103,14 +103,14 @@ export const Forget = () => {
             />
             <h2 className="mt-4">Vérifiez votre boîte mail</h2>
             <p className="mt-4 p-3 text-left">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Explicabo, asperiores cupiditate doloremque voluptatem quibusdam
-              mollitia beatae, at labore veritatis exercitationem totam eos
-              dolor ad. Ullam unde beatae architecto itaque ipsa. Recusandae,
-              sapiente? Cupiditate eligendi distinctio incidunt laborum, autem
-              odio eum commodi nisi. Dolore explicabo sunt ad, temporibus
-              adipisci dolorum soluta. Placeat alias repellat iste
-              exercitationem fuga neque quae nam deleniti!
+              <p>
+                Un courriel de réinitialisation de mot de passe a été envoyé à
+                l'adresse associée à votre compte. Veuillez suivre les
+                instructions dans le courriel pour réinitialiser votre mot de
+                passe. Assurez-vous de vérifier votre boîte de réception et
+                éventuellement le dossier de courriels indésirables (spam) si
+                vous ne trouvez pas le courriel.
+              </p>
             </p>
             <h5
               style={{ cursor: "pointer" }}
@@ -123,7 +123,7 @@ export const Forget = () => {
         </div>
       ) : (
         <div
-          className="m-auto w-8 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
+          className="m-auto w-10 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
           style={{ background: "#232323", borderRadius: "12px" }}
         >
           <div className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column ">

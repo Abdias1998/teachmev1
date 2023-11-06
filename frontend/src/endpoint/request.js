@@ -5,5 +5,7 @@ const request = {
   login: `${api}/auth/login`,
   register: `${api}/auth/register`,
   forget: `${api}/auth/forget`,
+
+  user_info: `${api}/user_info`,
 };
 export default request;
