@@ -10,10 +10,11 @@ const user_route = require("./routes/uts/auth.routes");
 
 const app = express();
 const port = process.env.port;
+const url = process.env.port;
 app.use(cookie_parser());
 app.use(helmet());
 
-app.use(cors({ credentials: true, origin: "http://localhost:3000" }));
+app.use(cors({ credentials: true, origin: process.env.client_url }));
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./frontend/build")));
