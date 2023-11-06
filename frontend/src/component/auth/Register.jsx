@@ -8,6 +8,7 @@ import axios from "axios";
 import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router-dom";
+import request from "../../endpoint/request";
 
 export const Register = () => {
   const history = useNavigate();
@@ -32,7 +33,8 @@ export const Register = () => {
   };
 
   const defaultValues = {
-    value: "",
+    pseudo: "",
+    email: "",
     password: "",
   };
 
@@ -47,14 +49,11 @@ export const Register = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true); // Activer le chargement lors de la soumission
-      const response = await axios.post(
-        "http://localhost:7200/v1/auth/register",
-        {
-          pseudo: data.pseudo,
-          email: data.email,
-          password: data.password,
-        }
-      );
+      const response = await axios.post(`${request.register}`, {
+        pseudo: data.pseudo,
+        email: data.email,
+        password: data.password,
+      });
 
       if (response.status === 200) {
         // setBackendMessage(response.data.message);
@@ -85,7 +84,7 @@ export const Register = () => {
 
   return (
     <div
-      className="m-auto w-8 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
+      className="m-auto w-10 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
       style={{ background: "#232323", borderRadius: "12px" }}
     >
       <div className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column ">
@@ -125,7 +124,11 @@ export const Register = () => {
                     })} mt-6 `}
                     onChange={(e) => {
                       field.onChange(e.target.value);
-                      setIsFormValid(!!e.target.value && !!passwordValue);
+                      setIsFormValid(
+                        !!e.target.value &&
+                          !!passwordValue &&
+                          !!getValues("email")
+                      );
                     }}
                   />
                 </span>
@@ -154,7 +157,11 @@ export const Register = () => {
                     })} mt-4`}
                     onChange={(e) => {
                       field.onChange(e.target.value);
-                      setIsFormValid(!!e.target.value && !!passwordValue);
+                      setIsFormValid(
+                        !!e.target.value &&
+                          !!passwordValue &&
+                          !!getValues("pseudo")
+                      );
                     }}
                   />
                 </span>
@@ -181,7 +188,11 @@ export const Register = () => {
                     })} mt-4   `}
                     onChange={(e) => {
                       field.onChange(e.target.value);
-                      setIsFormValid(!!getValues("value") && !!e.target.value);
+                      setIsFormValid(
+                        !!getValues("pseudo") &&
+                          !!e.target.value &&
+                          !!getValues("email")
+                      );
                     }}
                   />
                 </span>
@@ -201,13 +212,13 @@ export const Register = () => {
             disabled={!isFormValid || isLoading}
           />
         </form>
-        <h5
+        <h4
           onClick={redirectToLogin}
           style={{ cursor: "pointer" }}
           className="mb-4 mt-2 text-center underline"
         >
           Se connecter
-        </h5>
+        </h4>
       </div>
     </div>
   );

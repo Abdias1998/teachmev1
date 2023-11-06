@@ -47,13 +47,13 @@ export const Heroes = () => {
         /> */}
         <h1
           style={{ zIndex: "2", color: "#E50913" }}
-          className="m-4 text-4xl font-bold ml-6"
+          className="m-4 text-2xl md:text-4xl font-bold ml-6"
         >
           Teach Me
         </h1>
         <p>
           <Button
-            className="mr-6"
+            className="mr-6  text-sm md:text-md"
             style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
             label="Connexion"
             onClick={redirectToLoginPage}

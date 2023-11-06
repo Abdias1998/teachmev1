@@ -8,11 +8,12 @@ import axios from "axios";
 import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
 import { useNavigate } from "react-router-dom";
+import request from "../../endpoint/request";
 
 export const Forget = () => {
   const history = useNavigate();
   const [isFormValid, setIsFormValid] = useState(false);
-  const [validation, setValidation] = useState(true);
+  const [validation, setValidation] = useState(false);
   // const [backendMessage, setBackendMessage] = useState("");
   const [eye, setEye] = useState(true);
   const [isLoading, setIsLoading] = useState(false); // État pour le chargementz
@@ -51,9 +52,8 @@ export const Forget = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true); // Activer le chargement lors de la soumission
-      const response = await axios.post("https://render.uueiei/login", {
-        identifier: data.value,
-        password: data.password,
+      const response = await axios.post(request.forget, {
+        email: data.value,
       });
 
       if (response.status === 200) {
@@ -61,13 +61,14 @@ export const Forget = () => {
         showToast("success", "Success", response.data.message);
         data.value && show();
         reset();
+        setValidation(true);
       } else {
         // setBackendMessage(response.data.error);
         showToast("error", "Error", response.data.error);
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.message);
+      showToast("error", "Error", error.response.data.message);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue
     }
@@ -85,9 +86,9 @@ export const Forget = () => {
 
   return (
     <>
-      {!validation ? (
+      {validation ? (
         <div
-          className="m-auto w-8 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
+          className="m-auto w-10 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
           style={{ background: "#232323", borderRadius: "12px" }}
         >
           <div className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column ">
@@ -176,7 +177,7 @@ export const Forget = () => {
                 className="m-6 w-6 text-sm md:text-lg mt-4 h-2 "
                 icon={isLoading ? "pi pi-spin pi-spinner" : ""}
                 iconPos="right"
-                label={isLoading ? "Chargement..." : "Se connecter"}
+                label={isLoading ? "Chargement..." : "Envoyer"}
               />
             </form>
             <h5

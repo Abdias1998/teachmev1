@@ -18,15 +18,14 @@ app.use(cors({ credentials: true, origin: process.env.client_url }));
 app.use(body_parser.json());
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./frontend/build")));
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
-});
-app.get("/auth/login", function (req, res) {
-  res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
-});
-app.get("/auth/register", function (req, res) {
-  res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
-});
+
+app.get(
+  ["/", "/register", "/login", "/forget_password", "/reset/:token"],
+  function (req, res) {
+    res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
+  }
+);
+
 app.use("/v1", user_route);
 app.listen(port, () => {
   console.log(`Le serveur est démarrer sur le port ${port}`);

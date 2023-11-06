@@ -81,7 +81,7 @@ export const Reset = () => {
 
   return (
     <div
-      className="m-auto w-8 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
+      className="m-auto w-10 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
       style={{ background: "#232323", borderRadius: "12px" }}
     >
       <div className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column ">

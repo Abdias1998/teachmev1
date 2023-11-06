@@ -8,6 +8,7 @@ import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
 
 import { useNavigate } from "react-router-dom";
+import request from "../../endpoint/request";
 
 export const Login = () => {
   const history = useNavigate();
@@ -52,7 +53,7 @@ export const Login = () => {
     try {
       setIsLoading(true); // Activer le chargement lors de la soumission
       const response = await axios.post(
-        "http://localhost:7200/v1/auth/login",
+        ` ${request.login}`,
         {
           identifier: data.value,
           password: data.password,
@@ -93,7 +94,7 @@ export const Login = () => {
 
   return (
     <div
-      className="m-auto w-8 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
+      className="m-auto w-10 md:w-4 mt-6 flex justify-content-center shadow-8  align-items-center align-content-center  "
       style={{ background: "#232323", borderRadius: "12px" }}
     >
       <div className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column ">
