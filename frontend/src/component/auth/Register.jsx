@@ -176,7 +176,10 @@ export const Register = () => {
             rules={{ required: "Ce champ est requis" }}
             render={({ field, fieldState }) => (
               <>
-                <span className="p-input-icon-right">
+                <span
+                  style={{ cursor: "pointer" }}
+                  className="p-input-icon-right "
+                >
                   <Password
                     placeholder="*********"
                     id={field.name}

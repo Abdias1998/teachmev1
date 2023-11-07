@@ -4,19 +4,25 @@ import React, { useRef, useState } from "react";
 import { Controller, useForm, useWatch } from "react-hook-form";
 // import { Password } from "primereact/password";
 import axios from "axios";
-
 import { classNames } from "primereact/utils";
 import { Toast } from "primereact/toast";
-import { useNavigate } from "react-router-dom";
+
+import { useNavigate, useParams } from "react-router-dom";
+import request from "../../endpoint/request";
 
 export const Reset = () => {
   const history = useNavigate();
+  const params = useParams();
   const [isFormValid, setIsFormValid] = useState(false);
   // const [backendMessage, setBackendMessage] = useState("");
   const [eye, setEye] = useState(true);
   const [isLoading, setIsLoading] = useState(false); // État pour le chargementz
+
+  function redirectToForget() {
+    history("/forget_password");
+  }
   function redirectToRegister() {
-    history("register");
+    history("/register");
   }
   const toast = useRef(null);
 
@@ -32,8 +38,8 @@ export const Reset = () => {
   };
 
   const defaultValues = {
-    value: "",
     password: "",
+    newPass: "",
   };
 
   const {
@@ -47,23 +53,34 @@ export const Reset = () => {
   const onSubmit = async (data) => {
     try {
       setIsLoading(true); // Activer le chargement lors de la soumission
-      const response = await axios.post("https://render.uueiei/login", {
-        identifier: data.value,
-        password: data.password,
-      });
-
-      if (response.status === 200) {
-        // setBackendMessage(response.data.message);
-        showToast("success", "Success", response.data.message);
-        data.value && show();
-        reset();
+      if (data.newPass !== data.password) {
+        console.log(` ${request.reset}/${params.token}`);
+        showToast("error", "Error", "Les mots de passe ne correspondent pas");
       } else {
-        // setBackendMessage(response.data.error);
-        showToast("error", "Error", response.data.error);
+        const response = await axios.post(
+          ` ${request.reset}/${params.token}`,
+          {
+            newPass: data.newPass,
+          },
+          { withCredentials: true }
+        );
+        if (response.status === 200) {
+          // setBackendMessage(response.data.message);
+          showToast("success", "Success", response.data.message);
+          data.value && show();
+          reset();
+          setTimeout(() => {
+            history("/login");
+          }, 1000);
+        } else {
+          // setBackendMessage(response.data.error);
+          showToast("error", "Error", response.data.error);
+        }
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.message);
+      showToast("error", "Error", error.response.data.message);
+      console.log(error);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue
     }
@@ -94,7 +111,7 @@ export const Reset = () => {
           alt=""
           srcset=""
         />
-        <h2 className="mt-4">Connexion</h2>
+        <h2 className="mt-4">Mettez un nouveau mot de passe</h2>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex  w-12 justify-content-between  align-items-center align-content-center flex-column "
@@ -117,7 +134,7 @@ export const Reset = () => {
                   <InputText
                     required
                     type={`${eye ? "text" : "password"}`}
-                    placeholder="*********"
+                    placeholder="Nouveau mot de passe"
                     id={field.name}
                     value={field.value}
                     // feedback={true}
@@ -127,12 +144,52 @@ export const Reset = () => {
                     })} mt-4   `}
                     onChange={(e) => {
                       field.onChange(e.target.value);
-                      setIsFormValid(!!getValues("value") && !!e.target.value);
+                      setIsFormValid(
+                        !!getValues("newPass") && !!e.target.value
+                      );
                     }}
                   />
                 </span>
 
                 {getFormErrorMessage("password")}
+              </>
+            )}
+          />
+          <Controller
+            name="newPass"
+            control={control}
+            rules={{ required: "Ce champ est requis" }}
+            render={({ field, fieldState }) => (
+              <>
+                <span className="p-input-icon-right">
+                  <i
+                    onClick={() => setEye(!eye)}
+                    style={{ cursor: "pointer" }}
+                    // className="pi pi-spin pi-spinner"
+                    className={`${eye ? "pi pi-lock" : "pi pi-unlock"}  `}
+                  />
+
+                  <InputText
+                    required
+                    type={`${eye ? "text" : "password"}`}
+                    placeholder="Confimer le nouveau mot de passe"
+                    id={field.name}
+                    value={field.value}
+                    // feedback={true}
+                    // toggleMask={true}
+                    className={`${classNames({
+                      "p-invalid": fieldState.error,
+                    })} mt-4   `}
+                    onChange={(e) => {
+                      field.onChange(e.target.value);
+                      setIsFormValid(
+                        !!getValues("password") && !!e.target.value
+                      );
+                    }}
+                  />
+                </span>
+
+                {getFormErrorMessage("newPass")}
               </>
             )}
           />
@@ -147,19 +204,6 @@ export const Reset = () => {
             disabled={!isFormValid || isLoading}
           />
         </form>
-        <h5
-          style={{ cursor: "pointer" }}
-          className="text-center underline"
-          onClick={redirectToRegister}
-        >
-          Vous n'avez pas un compte ? Inscrivez-vous
-        </h5>
-        <h5
-          style={{ cursor: "pointer" }}
-          className="mb-4 mt-2 text-center underline"
-        >
-          Mot de passe oublié ?
-        </h5>
       </div>
     </div>
   );

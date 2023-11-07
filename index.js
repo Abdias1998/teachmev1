@@ -25,6 +25,11 @@ app.get(
     res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
   }
 );
+app.get("/video/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const videopath = path.join(__dirname, "./video", filename);
+  res.sendFile(videopath);
+});
 
 app.use("/v1", user_route);
 app.listen(port, () => {

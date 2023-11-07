@@ -152,6 +152,7 @@ export const Login = () => {
                 <span className="p-input-icon-right">
                   <i
                     onClick={() => setEye(!eye)}
+                    style={{ cursor: "pointer" }}
                     // className="pi pi-spin pi-spinner"
                     className={`${eye ? "pi pi-lock" : "pi pi-unlock"}  `}
                   />
