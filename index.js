@@ -6,7 +6,11 @@ const cors = require("cors");
 const helmet = require("helmet");
 const cookie_parser = require("cookie-parser");
 const body_parser = require("body-parser");
-const user_route = require("./routes/uts/auth.routes");
+const user_route = require("./routes/user/auth.routes");
+const preach_route = require("./routes/video/preach.routes");
+const comment_route = require("./routes/video/coment.routes");
+const ratings_route = require("./routes/video/ratings.routes");
+const admin_auth_route = require("./routes/admin/admin.routes");
 
 const app = express();
 const port = process.env.port;
@@ -25,6 +29,14 @@ app.get(
     res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
   }
 );
+app.get("/image/:filename", (req, res) => {
+  const filename = req.params.filename;
+  // Récupérer le chemin complet de l'image
+  const imagePath = path.join(__dirname, "./image", filename);
+  // Renvoyer l'image au client
+  res.sendFile(imagePath);
+});
+
 app.get("/video/:filename", (req, res) => {
   const filename = req.params.filename;
   const videopath = path.join(__dirname, "./video", filename);
@@ -32,6 +44,10 @@ app.get("/video/:filename", (req, res) => {
 });
 
 app.use("/v1", user_route);
+app.use("/v1/admin", admin_auth_route);
+app.use("/v1/video/preach", preach_route);
+app.use("/v1", comment_route);
+app.use("/v1", ratings_route);
 app.listen(port, () => {
   console.log(`Le serveur est démarrer sur le port ${port}`);
 });

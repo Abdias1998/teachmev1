@@ -1,10 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;500&display=swap"); */
+
+@import url("https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap");
+
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: "EB Garamond", serif;
 }
 html {
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   overflow-x: scroll;
   /* font-size: 80px; */
 }
@@ -12,4 +16,74 @@ html {
 .fond {
   height: 100vh;
   background-image: url("../public/assets/images/fond.jpg");
+}
+
+.video-container {
+  position: relative;
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: black;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  display: block;
+  outline: none;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.controls-one {
+  display: flex;
+}
+.controls-deux {
+  position: absolute;
+  right: 0;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+  margin: 0 8px;
+}
+
+.actived {
+  color: red;
+
+  text-decoration: underline;
+}
+
+.video-progress {
+  background: #ccc; /* Couleur de fond de la barre de progression */
+  height: 3px; /* Hauteur de la barre de progression */
+  width: 100%; /* Largeur de la barre de progression (100% de la largeur du conteneur) */
+  position: relative;
+  bottom: 45px;
+  cursor: pointer;
+}
+
+.video-progress .progress {
+  background: red; /* Couleur de progression (rouge dans cet exemple) */
+  height: 100%; /* Hauteur de progression (100% de la hauteur de la barre de progression) */
+  width: 0; /* La largeur augmente en fonction de la progression */
+  transition: width 0.2s; /* Animation de transition pour une progression en douceur */
+}
+
+.red-bar {
+  background-color: red;
+  height: 1px;
+  width: 24px;
+  /* Ajustez la marge en fonction de votre mise en page */
 }

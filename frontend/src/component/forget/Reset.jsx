@@ -49,7 +49,7 @@ export const Reset = () => {
     getValues,
     reset,
   } = useForm({ defaultValues });
-
+  console.log(` ${request.reset}/${params.token}`);
   const onSubmit = async (data) => {
     try {
       setIsLoading(true); // Activer le chargement lors de la soumission
@@ -57,7 +57,7 @@ export const Reset = () => {
         console.log(` ${request.reset}/${params.token}`);
         showToast("error", "Error", "Les mots de passe ne correspondent pas");
       } else {
-        const response = await axios.post(
+        const response = await axios.put(
           ` ${request.reset}/${params.token}`,
           {
             newPass: data.newPass,

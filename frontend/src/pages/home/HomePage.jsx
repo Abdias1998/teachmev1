@@ -7,6 +7,7 @@ import axios from "axios";
 import { setGetUser } from "../../features/userReducer";
 import { useNavigate } from "react-router-dom";
 import request from "../../endpoint/request";
+import VideoPlayer from "../../component/home/VideoPlayer";
 axios.defaults.withCredentials = true;
 export const HomePage = () => {
   const history = useNavigate();
@@ -19,19 +20,19 @@ export const HomePage = () => {
     return data;
   };
   const user = useSelector((state) => state.user.user);
-  useEffect(() => {
-    sendRequest()
-      .then((data) => {
-        dispatch(setGetUser(data.user));
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setTimeout(() => {
-          history("/login");
-        }, 5000);
-      });
-  });
+  // useEffect(() => {
+  //   sendRequest()
+  //     .then((data) => {
+  //       dispatch(setGetUser(data.user));
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setTimeout(() => {
+  //         history("/login");
+  //       }, 5000);
+  //     });
+  // });
   return (
     <div>
       {/* <Row isLarger={true} title="NETFLIX ORIGINAL" movie={dataImageSlider} />
@@ -41,6 +42,7 @@ export const HomePage = () => {
         Besoin urgent d'un developpeur frontend react, de deux graphiste, d'un
         community manager , un administrateur réseau
       </p>
+      <VideoPlayer />
     </div>
   );
 };
