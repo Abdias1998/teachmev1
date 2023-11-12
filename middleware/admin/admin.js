@@ -1,9 +1,8 @@
-const User = require("../model/uts/user");
+const Admin = require("../../model/admin/admin");
 const jwt = require("jsonwebtoken");
 const async_handler = require("express-async-handler");
-const user = require("../model/uts/user");
 
-module.exports.verify_token = async_handler(async (req, res, next) => {
+module.exports.verify_token_admin = async_handler(async (req, res, next) => {
   const cookies = req.headers.cookie;
   const token = cookies?.split("=")[1];
   try {
@@ -17,7 +16,7 @@ module.exports.verify_token = async_handler(async (req, res, next) => {
     });
   }
 
-  jwt.verify(String(token), process.env.token_secrete, (err, user) => {
+  jwt.verify(String(token), process.env.token_secrete_admin, (err, user) => {
     if (!err) {
       req.id = user?.id;
     }
@@ -25,11 +24,11 @@ module.exports.verify_token = async_handler(async (req, res, next) => {
   next();
 });
 
-module.exports.get_user = async_handler(async (req, res) => {
+module.exports.get_user_admin = async_handler(async (req, res) => {
   const user_id = req.id;
   let user;
   try {
-    user = await User.findById(user_id, "-password");
+    user = await Admin.findById(user_id, "-password");
   } catch (error) {
     return new Error(error);
   }

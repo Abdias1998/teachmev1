@@ -24,16 +24,15 @@ const user_schema = mongoose.Schema(
     },
     //
     //   role des utilisateurs
-    admin: {
-      type: Boolean,
-      default: false,
-    },
 
     //
     // information dynamique
     country: {
       type: String,
       default: "",
+    },
+    deviceType: {
+      type: String,
     },
     reset_password_token: {
       type: String,
@@ -48,6 +47,12 @@ const user_schema = mongoose.Schema(
       default: "./assets/images/user.png",
     },
     followers: {
+      type: [String],
+    },
+    user_banned: {
+      type: Boolean,
+    },
+    reporting: {
       type: [String],
     },
   },

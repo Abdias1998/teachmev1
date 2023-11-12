@@ -215,13 +215,13 @@ export const Register = () => {
             disabled={!isFormValid || isLoading}
           />
         </form>
-        <h4
+        <h5
           onClick={redirectToLogin}
           style={{ cursor: "pointer" }}
           className="mb-4 mt-2 text-center underline"
         >
-          Se connecter
-        </h4>
+          J'ai déjà un compte ? Je me connecte
+        </h5>
       </div>
     </div>
   );

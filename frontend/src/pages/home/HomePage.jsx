@@ -7,6 +7,7 @@ import axios from "axios";
 import { setGetUser } from "../../features/userReducer";
 import { useNavigate } from "react-router-dom";
 import request from "../../endpoint/request";
+import Navbar from "../../component/home/navbar/Navbar";
 axios.defaults.withCredentials = true;
 export const HomePage = () => {
   const history = useNavigate();
@@ -19,28 +20,24 @@ export const HomePage = () => {
     return data;
   };
   const user = useSelector((state) => state.user.user);
-  useEffect(() => {
-    sendRequest()
-      .then((data) => {
-        dispatch(setGetUser(data.user));
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log(error);
-        setTimeout(() => {
-          history("/login");
-        }, 5000);
-      });
-  });
+  // useEffect(() => {
+  //   sendRequest()
+  //     .then((data) => {
+  //       dispatch(setGetUser(data.user));
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //       setTimeout(() => {
+  //         history("/login");
+  //       }, 5000);
+  //     });
+  // });
   return (
     <div>
       {/* <Row isLarger={true} title="NETFLIX ORIGINAL" movie={dataImageSlider} />
       <Row title="Trending Now" movie={movie} /> */}
-      <h1>{user.pseudo}</h1>
-      <p>
-        Besoin urgent d'un developpeur frontend react, de deux graphiste, d'un
-        community manager , un administrateur réseau
-      </p>
+      <Navbar user={user} />
     </div>
   );
 };

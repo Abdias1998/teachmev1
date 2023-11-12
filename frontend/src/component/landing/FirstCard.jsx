@@ -58,8 +58,8 @@ export const FirstCard = ({
   return (
     <>
       <div className="m-4 " style={{ backgroundColor: "#111" }}>
-        <h2 className="text-left md:text-center ">{titre}</h2>
-        <p className="mt-4 text-left text-sm md:text-lg">{paragraph}</p>
+        <h2 className="text-left md:text-center  ">{titre}</h2>
+        <p className="mt-4 text-left text-sm">{paragraph}</p>
         <Slider {...settings}>
           {slider?.map((img, index) => {
             const header = (
@@ -70,24 +70,42 @@ export const FirstCard = ({
                 src={img.url}
               />
             );
+            const title = (
+              <>
+                <h1 style={{ color: "white" }} className="text-xl">
+                  {truncate(img.title, 130)}
+                </h1>
+              </>
+            );
+            const subtitle = (
+              <>
+                <h3 style={{ color: "white" }} className="text-sm">
+                  {img.des}
+                </h3>
+              </>
+            );
             const footer = (
               <>
-                <p className="text-sm">{truncate(img.text, 130)}</p>
+                <p style={{ color: "white" }} className="text-sm">
+                  {truncate(img.text, 130)}
+                </p>
               </>
             );
             return (
-              <div className="mt-4 card flex justify-content-between">
+              <div className="mt-4 card flex justify-content-between ">
                 <Card
-                  title={truncate(img.title, 13)}
-                  subTitle={img.des}
+                  title={title}
+                  subTitle={subtitle}
                   footer={footer}
                   header={header}
-                  className="hover m-2"
+                  className="hover m-2 "
+                  style={{ backgroundColor: "#111" }}
                 ></Card>
               </div>
             );
           })}
         </Slider>
+
         <div className={`ov `}>
           {sliderMovie?.map((el, index) => {
             return (
@@ -99,7 +117,7 @@ export const FirstCard = ({
                   }}
                   className={`im ${isLarger && "row_larger"}`}
                   src={isLarger ? el.url : el.url}
-                  alt=""
+                  alt="Card"
                 />
               </>
             );

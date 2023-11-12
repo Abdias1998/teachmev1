@@ -1,4 +1,4 @@
-const User = require("../../../model/uts/user");
+const User = require("../../../model/user/user");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const bcrypt = require("bcrypt");
@@ -43,13 +43,18 @@ module.exports.register = async_handler(async (req, res) => {
 
   // Crypter le mot de passe
   const hashed_password = bcrypt.hashSync(password, 10);
-
+  const deviceType = req.useragent.isMobile
+    ? "Mobile"
+    : req.useragent.isTablet
+    ? "Tablet"
+    : "Desktop";
   // Renvoyer les données dans la base
   try {
     const user = await new User({
       pseudo,
       email,
       password: hashed_password,
+      deviceType,
     });
     user.save();
     return res.status(200).json({ message: "Inscription réussie" });
