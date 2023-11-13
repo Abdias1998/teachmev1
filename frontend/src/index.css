@@ -21,3 +21,172 @@ a {
   height: 100vh;
   background-image: url("../public/assets/images/fond.jpg");
 }
+
+.video-container {
+  position: relative;
+  max-width: 800px;
+  /* margin: 0 auto; */
+  background-color: black;
+  overflow: hidden;
+}
+
+video {
+  width: 100%;
+  display: block;
+  outline: none;
+}
+/* Styling for the subtitle track */
+video::cue {
+  color: #ffffff; /* Couleur du texte des sous-titres */
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.7
+  ); /* Couleur de l'arrière-plan des sous-titres */
+  font-size: 26px; /* Taille de la police des sous-titres */
+  text-align: center; /* Alignement du texte des sous-titres (vous pouvez utiliser 'left', 'center', 'right', etc.) */
+  /* Police de caractères des sous-titres */
+  padding: 4px; /* Espacement intérieur des sous-titres */
+  border-radius: 4px;
+  /* Bord arrondi pour les sous-titres */
+  margin-bottom: 200px;
+}
+
+/* Styling for the active cue (currently displayed subtitle) */
+video::cue(b) {
+  font-weight: bold; /* Texte en gras pour les sous-titres actifs */
+}
+
+.controls {
+  display: none;
+}
+.video-container:hover .controls {
+  visibility: visible;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  transition: 450ms transform;
+}
+.controls {
+  visibility: hidden;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: rgba(0, 0, 0, 0.7);
+  padding: 5px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+@media screen {
+}
+.controls-one {
+  display: flex;
+}
+.controls-deux {
+  position: absolute;
+  right: 0;
+}
+
+.controls button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 12px;
+  margin: 0 8px;
+}
+
+.actived {
+  color: red;
+
+  text-decoration: underline;
+}
+
+.video-progress {
+  background: #ccc; /* Couleur de fond de la barre de progression */
+  height: 5px; /* Hauteur de la barre de progression */
+  width: 100%; /* Largeur de la barre de progression (100% de la largeur du conteneur) */
+  position: relative;
+  bottom: 45px;
+  cursor: pointer;
+}
+
+.video-progress .progress {
+  background: red; /* Couleur de progression (rouge dans cet exemple) */
+  height: 100%; /* Hauteur de progression (100% de la hauteur de la barre de progression) */
+  width: 0; /* La largeur augmente en fonction de la progression */
+  transition: width 0.2s; /* Animation de transition pour une progression en douceur */
+}
+
+.red-bar {
+  background-color: red;
+  height: 1px;
+  width: 24px;
+  /* Ajustez la marge en fonction de votre mise en page */
+}
+
+/* Styles pour100 le lecteur réduit */
+.miniPlayer {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #ccc;
+  background-color: #f2f2f2;
+  position: fixed;
+  bottom: 20px; /* Position en bas de la fenêtre */
+  right: 20px; /* Position à droite de la fenêtre */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px;
+  border-radius: 5px;
+  transition: width 0.3s, height 0.3s, transform 0.3s;
+  z-index: 999;
+}
+
+.miniPlayer:hover {
+  width: 100%; /* Largeur légèrement agrandie au survol */
+  height: 100px; /* Hauteur légèrement agrandie au survol */
+  transform: scale(1.01); /* Légère mise à l'échelle au survol */
+  background-color: #e0e0e0; /* Couleur de fond au survol */
+}
+
+/* Styles pour les boutons et icônes dans le lecteur réduit */
+.miniPlayer button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.miniPlayer button svg {
+  width: 24px;
+  height: 24px;
+  fill: #333; /* Couleur des icônes */
+}
+
+/* Styles pour le texte du sous-titre dans le lecteur réduit */
+.miniPlayer .subtitles {
+  flex: 1;
+  text-align: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 14px;
+  color: #333; /* Couleur du texte */
+}
+
+/* Styles pour le bouton de fermeture du lecteur réduit */
+.miniPlayer .close-button {
+  margin-right: 10px;
+}
+
+.miniPlayer .close-button svg {
+  fill: #f00; /* Couleur du bouton de fermeture */
+  cursor: pointer;
+}

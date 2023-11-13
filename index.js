@@ -24,7 +24,7 @@ app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "./frontend/build")));
 
 app.get(
-  ["/", "/register", "/login", "/forget_password", "/reset/:token"],
+  ["/", "/home", "/register", "/login", "/forget_password", "/reset/:token"],
   function (req, res) {
     res.sendFile(path.join(__dirname, "./frontend/build", "index.html"));
   }

@@ -1,16 +1,25 @@
 const Preach = require("../../model/admin/preach/video_preach");
 const mongoose = require("mongoose");
 const User = require("../../model/user/user"); // Supposons que vous avez un modèle User
-
+const ObjectId = mongoose.Types.ObjectId;
 // Contrôleur pour la création d'un film
 module.exports.createPreach = async (req, res) => {
   try {
-    const { title, description, genre, releaseYear, director, cast, duration } =
-      req.body;
+    const {
+      title,
+      description,
+      genre,
+      releaseYear,
+      director,
+      cast,
+      duration,
+      keywords,
+    } = req.body;
 
     const newPreach = new Preach({
       title,
       description,
+      keywords,
       genre,
       releaseYear,
       director,
@@ -90,5 +99,88 @@ module.exports.viewsMiddleware = async (req, res) => {
     return res
       .status(500)
       .json({ error: "Erreur lors d'ajout de vue" + error });
+  }
+};
+module.exports.updatePreach = async (req, res) => {
+  try {
+    const { id } = req.params; // Identifiant de la vidéo à mettre à jour
+    const {
+      title,
+      description,
+      genre,
+      releaseYear,
+      director,
+      cast,
+      duration,
+      keywords,
+    } = req.body;
+
+    // Recherchez la vidéo par son identifiant
+    const preach = await Preach.findById(id);
+
+    if (!preach) {
+      return res.status(404).json({ error: "Vidéo non trouvée" });
+    }
+
+    // Mettez à jour les propriétés de la vidéo
+    preach.title = title;
+    preach.description = description;
+    preach.genre = genre;
+    preach.releaseYear = releaseYear;
+    preach.director = director;
+    preach.duration = duration;
+    preach.keywords = keywords;
+
+    // Enregistrez les modifications
+    const updatedPreach = await preach.save();
+
+    res.status(200).json({
+      preach: updatedPreach,
+      message: "Vidéo mise à jour avec succès",
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la mise à jour de la vidéo " + error });
+  }
+};
+module.exports.deleteVideo = async (req, res) => {
+  const id = req.params.id;
+
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).send("Id Inconnue" + req.params.id);
+  }
+
+  Preach.findByIdAndRemove(id)
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      return res.status(500).json({
+        message:
+          "Vous pouvez pas supprimez cette vidéo, veuilez réessayez plus tard" +
+          err,
+      });
+    });
+};
+
+module.exports.getTop5Videos = async (req, res) => {
+  try {
+    const top5MostViewedVideos = await Preach.find({})
+      .sort({ views: -1 })
+      .limit(5);
+
+    const top5MostCommentedVideos = await Preach.find({})
+      .sort({ "comments.length": -1 })
+      .limit(5);
+
+    res.status(200).json({
+      mostViewed: top5MostViewedVideos,
+      mostCommented: top5MostCommentedVideos,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Erreur lors de la récupération des vidéos " + error });
   }
 };

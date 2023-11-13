@@ -42,6 +42,10 @@ const preachSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    keywords: {
+      type: String,
+      required: true,
+    },
     viewedBy: [
       {
         type: mongoose.Schema.Types.ObjectId,

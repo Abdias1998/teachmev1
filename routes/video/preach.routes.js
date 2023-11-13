@@ -32,7 +32,10 @@ router.put(
   uploadsImage.single("imageFile"),
   preach_controler.createCoverImage
 );
+router.put("/update/:id", preach_controler.updatePreach);
 router.get("/read", preach_controler.readVideo);
+router.delete("/delete/:id", preach_controler.deleteVideo);
+router.get("/videos/top5", preach_controler.getTop5Videos);
 
 module.exports = router;
 // intext:"react" filetype:pdf
