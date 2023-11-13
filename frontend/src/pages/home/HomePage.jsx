@@ -8,6 +8,7 @@ import { setGetUser } from "../../features/userReducer";
 import { useNavigate } from "react-router-dom";
 import request from "../../endpoint/request";
 import VideoPlayer from "../../component/home/VideoPlayer";
+import Navbar from "../../component/home/navbar/Navbar";
 axios.defaults.withCredentials = true;
 export const HomePage = () => {
   const history = useNavigate();
@@ -38,10 +39,7 @@ export const HomePage = () => {
       {/* <Row isLarger={true} title="NETFLIX ORIGINAL" movie={dataImageSlider} />
       <Row title="Trending Now" movie={movie} /> */}
       <h1>{user.pseudo}</h1>
-      <p>
-        Besoin urgent d'un developpeur frontend react, de deux graphiste, d'un
-        community manager , un administrateur réseau
-      </p>
+      <Navbar />
       <VideoPlayer />
     </div>
   );
