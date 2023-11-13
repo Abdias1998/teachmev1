@@ -44,7 +44,7 @@ video::cue {
     0,
     0.7
   ); /* Couleur de l'arrière-plan des sous-titres */
-  font-size: 26px; /* Taille de la police des sous-titres */
+  font-size: 16px; /* Taille de la police des sous-titres */
   text-align: center; /* Alignement du texte des sous-titres (vous pouvez utiliser 'left', 'center', 'right', etc.) */
   /* Police de caractères des sous-titres */
   padding: 4px; /* Espacement intérieur des sous-titres */
@@ -61,10 +61,19 @@ video::cue(b) {
 .controls {
   display: none;
 }
+
+input {
+  position: relative;
+  top: 1rem;
+  padding: 5px;
+  height: 2rem;
+}
+
 .video-container:hover .controls {
   visibility: visible;
   display: flex;
   align-items: center;
+
   justify-content: flex-start;
   background-color: rgba(0, 0, 0, 0.7);
   padding: 5px;
@@ -133,14 +142,14 @@ video::cue(b) {
 
 /* Styles pour100 le lecteur réduit */
 .miniPlayer {
-  width: 100%;
+  width: 80%;
   height: 60px;
   border: 1px solid #ccc;
   background-color: #f2f2f2;
   position: fixed;
-  bottom: 20px; /* Position en bas de la fenêtre */
-  right: 20px; /* Position à droite de la fenêtre */
+  bottom: 0px; /* Position en bas de la fenêtre */
   display: flex;
+  top: 75vh;
   align-items: center;
   justify-content: space-between;
   padding: 5px;
@@ -150,7 +159,7 @@ video::cue(b) {
 }
 
 .miniPlayer:hover {
-  width: 100%; /* Largeur légèrement agrandie au survol */
+  width: 95%; /* Largeur légèrement agrandie au survol */
   height: 100px; /* Hauteur légèrement agrandie au survol */
   transform: scale(1.01); /* Légère mise à l'échelle au survol */
   background-color: #e0e0e0; /* Couleur de fond au survol */

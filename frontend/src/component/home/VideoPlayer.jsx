@@ -229,14 +229,14 @@ const VideoPlayer = () => {
 
   const [isMiniPlayer, setIsMiniPlayer] = useState(false);
 
-  const [isDragging, setIsDragging] = useState(false);
-
-  const handleProgressDragStart = () => {
-    setIsDragging(true);
-    videoRef.current.pause();
+  const [inputValue, setInputValue] = useState(0);
+  const handleInputChange = (e) => {
+    const time = parseFloat(e.target.value);
+    videoRef.current.currentTime = time;
+    setInputValue(time);
   };
   const handleRewind = () => {
-    const newTime = videoRef.current.currentTime - 5;
+    const newTime = videoRef.current.currentTime - 30;
     if (newTime < 0) {
       videoRef.current.currentTime = 0;
     } else {
@@ -244,7 +244,7 @@ const VideoPlayer = () => {
     }
   };
   const handleForward = () => {
-    const newTime = videoRef.current.currentTime + 5;
+    const newTime = videoRef.current.currentTime + 30;
     if (newTime > videoRef.current.duration) {
       videoRef.current.currentTime = videoRef.current.duration;
     } else {
@@ -252,30 +252,6 @@ const VideoPlayer = () => {
     }
   };
 
-  const handlePlayFromMiddle = () => {
-    const newTime = videoRef.current.duration / 2;
-    videoRef.current.currentTime = newTime;
-    videoRef.current.play();
-    setIsPaused(false);
-  };
-
-  const handleProgressDrag = (e) => {
-    if (isDragging) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const percentage = (x / rect.width) * 100;
-      const time = (duration * percentage) / 100;
-      videoRef.current.currentTime = time;
-      setCurrentTime(time);
-    }
-  };
-
-  const handleProgressDragEnd = () => {
-    if (isDragging) {
-      videoRef.current.play();
-      setIsDragging(false);
-    }
-  };
   const togglePlay = () => {
     if (videoRef.current.paused) {
       videoRef.current.play();
@@ -303,10 +279,6 @@ const VideoPlayer = () => {
     setIsMiniPlayer(!isMiniPlayer);
   };
 
-  const toggleTheaterMode = () => {
-    // Implémentez ici la logique pour activer/désactiver le mode cinéma
-  };
-
   const toggleFullScreen = () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -320,25 +292,18 @@ const VideoPlayer = () => {
     videoRef.current.playbackRate = playbackRates[newIndex];
     setPlaybackRateIndex(newIndex);
   };
+  // ...
 
-  const handleProgressClick = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = (x / rect.width) * 100;
-    const time = (videoRef.current.duration * percentage) / 100;
-    videoRef.current.currentTime = time;
-  };
-
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
   useEffect(() => {
     videoRef.current.addEventListener("timeupdate", () => {
-      const current = videoRef.current.currentTime;
-      const total = videoRef.current.duration;
-      setCurrentTime(current);
-      setDuration(total);
+      const currentTime = videoRef.current.currentTime;
+      setInputValue(currentTime);
     });
+  }, []);
 
+  // ...
+
+  useEffect(() => {
     videoRef.current.addEventListener("timeupdate", () => {
       if (subtitlesRef.current) {
         const activeTrack = Array.from(captionsRef.current.track.activeCues);
@@ -353,15 +318,14 @@ const VideoPlayer = () => {
   }, []);
 
   return (
-    <div>
+    <div style={{ position: "sticky" }}>
       <div
         className={`video-container relative ${
           isMiniPlayer ? "miniPlayer" : !isPaused && "isPaused"
         }`}
       >
-        <button onClick={handleRewind}>-30s</button>
-        <button onClick={handlePlayFromMiddle}>Play from Middle</button>
-        <button onClick={handleForward}>+30s</button>
+        <div className="video-controls"></div>
+
         <video src="./test.mp4" ref={videoRef}>
           <track
             kind="captions"
@@ -374,36 +338,66 @@ const VideoPlayer = () => {
 
         <div className="controls">
           <div className="controls-one">
-            <p onClick={togglePlay}>
-              {isPaused ? (
+            <p>
+              {" "}
+              <button onClick={handleRewind} className="">
+                -30s
                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
                   width="32"
                   height="32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              ) : (
-                <svg
-                  width="32"
-                  height="32"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                </svg>
-              )}
+                  <path
+                    fill="currentColor"
+                    d="M6.59 15.41L8 14 5 11l3-3-1.41-1.41L3.17 12l2.42 2.41z"
+                  />
+                </svg>{" "}
+              </button>
+              <button onClick={togglePlay}>
+                {isPaused ? (
+                  <svg
+                    width="32"
+                    height="32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                ) : (
+                  <svg
+                    width="32"
+                    height="32"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                  </svg>
+                )}
+              </button>
             </p>
-
+            <button onClick={handleForward} className="control-button">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="34"
+                height="34"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  fill="currentColor"
+                  d="M15.41 15.41L14 14l3-3-3-3 1.41-1.41L18.83 12l-2.42 2.41z"
+                />
+              </svg>
+              +30s
+            </button>
             <p onClick={toggleMute}>
               {isMuted ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
+                  width="34"
+                  height="34"
                   viewBox="0 0 48 48"
                 >
                   <path
@@ -414,8 +408,8 @@ const VideoPlayer = () => {
               ) : (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  width="32"
-                  height="32"
+                  width="34"
+                  height="34"
                   viewBox="0 0 48 48"
                 >
                   <path
@@ -466,7 +460,24 @@ const VideoPlayer = () => {
             {/* ... (autres boutons existants) */}
           </div>
         </div>
+        <div className="">
+          <input
+            type="range"
+            className="video-input"
+            min={0}
+            max={videoRef.current ? videoRef.current.duration : 0}
+            value={inputValue}
+            onChange={handleInputChange}
+          />
+        </div>
       </div>
+      <h4>
+        vSuspendisse nisl elit, rhoncus eget, urna cursus vestibulum. Sed
+        mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non
+        adipiscing dolor urna a orci. Etiam sollicitudin, ipsum eu pulvinar
+        rutrum, tellus ipsum laoreet sapien, quis venenatis ante odio sit amet
+        eros. Donec venenatis vulputate lorem.
+      </h4>
     </div>
   );
 };
