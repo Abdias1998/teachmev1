@@ -62,7 +62,7 @@ video::cue(b) {
   display: none;
 }
 
-input {
+.video-input {
   position: relative;
   top: 1rem;
   padding: 5px;

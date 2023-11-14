@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 
 export default function Navbar({ user }) {
   return (
-    <div className="h-2rem md:h-4rem w-full  shadow-8 relative  flex justify-content-between align-items-center align-content-center ">
+    <div className="h-3rem md:h-4rem w-full  shadow-8 relative  flex justify-content-between align-items-center align-content-center ">
       {/* Logo du plateforme */}
       <div>
         <h1 className=" text-sm md:text-lg px-4 ">TeachMe</h1>

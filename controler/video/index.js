@@ -15,6 +15,9 @@ module.exports.createPreach = async (req, res) => {
       duration,
       keywords,
     } = req.body;
+    function backdrop_path() {
+      return `${process.env.client_url}/image/backdrop_path/${director}`;
+    }
 
     const newPreach = new Preach({
       title,
@@ -23,6 +26,7 @@ module.exports.createPreach = async (req, res) => {
       genre,
       releaseYear,
       director,
+      backdrop_path: backdrop_path(),
       duration,
       cast: [],
       videoUrl:

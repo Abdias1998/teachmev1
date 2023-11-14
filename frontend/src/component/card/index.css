@@ -1,0 +1,71 @@
+/* Style général de la carte */
+.card {
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 16px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  width: 350px;
+}
+
+.card:hover {
+  border: 1px solid #ddd;
+  border-radius: 1px;
+}
+
+/* Image de la miniature */
+.thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+/* Contenu de la carte */
+.content {
+  padding: 16px;
+}
+
+/* Titre de la vidéo */
+h3 {
+  margin-top: 0;
+}
+
+/* Description de la vidéo */
+p {
+  color: #666;
+}
+
+/* Bouton "Watch Now" */
+.watch-button {
+  display: block;
+  margin-top: 8px;
+  padding: 8px 16px;
+  background-color: #ff0000; /* Arrière-plan rouge */
+  color: #fff; /* Texte blanc */
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.watch-button:hover {
+  background-color: #cc0000; /* Rouge légèrement plus sombre au survol */
+}
+
+/* Utilisation de flex pour la disposition */
+.video-list {
+  display: flex;
+
+  flex-wrap: wrap; /* Permet à la liste de vidéos de passer à la ligne si nécessaire */
+  justify-content: space-around; /* Centrage horizontal des vidéos */
+}
+
+/* Ajustements pour les petits écrans (par exemple, moins de 768px) */
+@media screen and (max-width: 767px) {
+  .card {
+    width: 100%; /* La carte occupe la largeur totale sur les petits écrans */
+  }
+}
+
+/* ... */

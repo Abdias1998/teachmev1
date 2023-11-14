@@ -1,0 +1,8 @@
+/* Ajoute ces styles CSS pour rendre la hauteur responsive */
+.banner {
+  height: 403px; /* Hauteur par défaut */
+
+  @media (max-width: 768px) {
+    height: 250px; /* Hauteur pour les petits écrans */
+  }
+}

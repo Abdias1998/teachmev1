@@ -83,3 +83,24 @@ export const movie = [
     url: "./assets/movie/film5.jfif",
   },
 ];
+export const medias = [
+  {
+    id: 1,
+    title: "Inception",
+    description:
+      "A thief who enters the dreams of others to steal their secrets.A thief who enters the dreams of others to steal their secrets.A thief who enters the dreams of others to steal their secrets.A thief who enters the dreams of others to steal their secrets.A thief who enters the dreams of others to steal their secrets.v",
+
+    backdrop_path: "./assets/large.webp",
+    type: "movie",
+  },
+  {
+    id: 2,
+    title: "Stranger Things",
+    description:
+      "A group of kids in a small town uncover a series of supernatural mysteries.",
+
+    backdrop_path: "./assets/large.webp",
+    type: "tv",
+  },
+  // Ajoute d'autres médias au besoin
+];
