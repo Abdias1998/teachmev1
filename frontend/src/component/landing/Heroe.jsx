@@ -33,10 +33,10 @@ export const Heroes = () => {
         backgroundPosition: "left center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
-        height: "auto",
+        // height: "600px",
         // color: "white",
       }}
-      className=" relative "
+      className=" relative h-screen  "
     >
       <div className=" relative flex justify-content-between align-items-center align-content-center">
         {/* <img
@@ -60,16 +60,21 @@ export const Heroes = () => {
           />
         </p>
       </div>
-      <div className="flex flex-column justify-content-start align-items-center align-content-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-center m-4">
-             Vidéo illimitée de prédication des hommes de Dieu
+      <div className="flex flex-column justify-content-start align-items-center align-content-center mt-6">
+        <h1 className=" font-bold text-center m-4">
+          Découvrez l'Inspiration Divine : Vidéos Impactantes de Prédicateurs
+          Africains
         </h1>
-        <h4 className="text-3xl md:text-4xl font-bold text-center m-4">
-           Découvrez les enseignements de vos prédicateurs préférés.{" "}
-        </h4>
-        <p className="text-center p-2 m-1">
-          Adaptable sur tout type d'appareil, mobile, tablette, Tv, ordinateur, 
-        </p>
+        <h2
+          className=" text-center m-2
+        "
+        >
+          Exploration Profonde de la Parole de Dieu par les Prédicateurs
+          Africains Renommés{" "}
+        </h2>
+        <h3 className="text-center p-2 m-1">
+          Regarder vos vidéos sans abonnement ni publicité
+        </h3>
         <p style={{ zIndex: "2" }}>
           {/* <form onSubmit={handleSubmit}>
             <InputText
@@ -98,7 +103,7 @@ export const Heroes = () => {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 1))",
+            "linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))",
         }}
         className="overlay"
       ></div>

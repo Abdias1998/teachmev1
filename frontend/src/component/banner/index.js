@@ -83,31 +83,33 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { AiFillPlayCircle } from "react-icons/ai";
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import { medias } from "../../data/sliderImage";
+
 import { Button } from "primereact/button";
 import "./index.css";
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
-const Banner = () => {
+const Banner = ({ videos }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % medias.length);
+      setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % videos.length);
     }, 5000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [medias]);
+  }, [videos]);
 
-  const currentMedia = medias[currentMediaIndex];
+  const currentMedia = videos[currentMediaIndex];
 
   return (
     <div
       style={{
         backgroundImage: `url(${
-          currentMedia?.backdrop_path || currentMedia?.poster_path
+          currentMedia?.coverImage.map((el) => {
+            return el;
+          }) || currentMedia?.backdrop_path
         })`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -137,15 +139,17 @@ const Banner = () => {
           width: "90%", // ajuster la largeur selon vos besoins
         }}
       >
-        <h1>{currentMedia?.title}</h1>
+        <h2>{currentMedia?.title}</h2>
         <p>
           {currentMedia?.description.length >= 300
             ? currentMedia?.description.slice(0, 300) + "..."
             : currentMedia?.description}
         </p>
+        <br />
+        <h5>{currentMedia?.director}</h5>
 
         <br />
-        <Button label="Lire la vidéo" className="watch-button" />
+        <button className="watch-button">Lire la vidéo</button>
       </div>
     </div>
   );

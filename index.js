@@ -42,6 +42,11 @@ app.get("/video/:filename", (req, res) => {
   const videopath = path.join(__dirname, "./video", filename);
   res.sendFile(videopath);
 });
+app.get("/image/cover_image/:filename", (req, res) => {
+  const filename = req.params.filename;
+  const videopath = path.join(__dirname, "./image/cover_image", filename);
+  res.sendFile(videopath);
+});
 
 app.use("/v1", user_route);
 app.use("/v1/admin", admin_auth_route);

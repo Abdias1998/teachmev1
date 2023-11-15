@@ -101,38 +101,9 @@ import "./index.css";
 import { AiOutlineClockCircle, AiOutlineHeart } from "react-icons/ai";
 import CircleLoader from "../circle-loader";
 
-const videos = [
-  {
-    id: 1,
-    title: "Titre de la vidéo 1",
-    description:
-      "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail1.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid1",
-  },
-  {
-    id: 2,
-    title: "Titre de la vidéo 1",
-    description:
-      "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail1.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid1",
-  },
-  {
-    id: 3,
-    title: "Titre de la vidéo 1",
-    description:
-      "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail1.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid1",
-  },
-  // ... autres vidéos
-];
-
 const VideoCard = ({ video }) => {
   return (
     <div>
-      <h2 className="px-4 pt-4">Découvrez plus de vidéo de foi</h2>
       <div className={`card`}>
         <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">
           <img
@@ -165,12 +136,15 @@ const VideoCard = ({ video }) => {
   );
 };
 
-const VideoList = () => {
+const VideoList = ({ videosUnWatched }) => {
   return (
-    <div className="video-list">
-      {videos.map((video) => (
-        <VideoCard key={video.id} video={video} />
-      ))}
+    <div>
+      <h2 className="px-4 pt-4">Découvrez plus de vidéo de foi</h2>
+      <div className="video-list">
+        {videosUnWatched?.map((video) => (
+          <VideoCard key={video._id} video={video} />
+        ))}
+      </div>
     </div>
   );
 };

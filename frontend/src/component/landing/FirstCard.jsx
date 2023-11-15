@@ -58,8 +58,8 @@ export const FirstCard = ({
   return (
     <>
       <div className="m-4 " style={{ backgroundColor: "#111" }}>
-        <h2 className="text-left md:text-center ">{titre}</h2>
-        <p className="mt-4 text-left text-sm md:text-lg">{paragraph}</p>
+        <h2 className=" ">{titre}</h2>
+        <p className="mt-4">{paragraph}</p>
         <Slider {...settings}>
           {slider?.map((img, index) => {
             const header = (

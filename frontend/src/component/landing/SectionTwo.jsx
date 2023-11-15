@@ -9,7 +9,7 @@ export const SectionTwo = () => {
   }
   return (
     <div
-      className=" mb-6 w-full bg-black flex flex-column-reverse md:flex-row justify-content-between align-items-start mt-7"
+      className=" mb-6 w-full bg-black flex flex-column-reverse md:flex-row justify-content-between align-items-start mt-4"
       style={{ background: "#111" }}
     >
       <div className="w-12 md:w-6">
@@ -22,7 +22,7 @@ export const SectionTwo = () => {
       </div>
       <div className="w-12  md:w-6 p-4  ">
         <h2>Téléchargez vos enseignements pour les regarder hors ligne </h2>
-        <p className="mt-4  text-left text-sm">
+        <p className="mt-4">
           Vous pouvez télécharger les enseignements de vos choix pour les
           consulter hors ligne, à votre propre rythme. Inscrivez-vous
           gratuitement, explorez notre bibliothèque, et enrichissez votre vie

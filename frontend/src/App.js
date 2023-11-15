@@ -6,8 +6,30 @@ import { RegisterPage } from "./pages/auth/RegisterPage";
 import { ForgetPasswordPage } from "./pages/forget/ForgetPasswordPage";
 import { ResetPasswordPage } from "./pages/forget/ResetPassword";
 import { HomePage } from "./pages/home/HomePage";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./endpoint/request";
+import { setGetUser } from "./features/userReducer";
 
 function App() {
+  const dispatch = useDispatch();
+  // Utilisez une vérification supplémentaire ici
+
+  useEffect(() => {
+    getUser()
+      .then((data) => {
+        dispatch(setGetUser(data.user));
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+        // <CircleLoader />;
+        // setTimeout(() => {
+        //   history("/login");
+        // }, 5000);
+      });
+  }, []); // Assurez-vous que useEffect dépend de userId pour être exécuté lorsque userId change
+
   return (
     <>
       <BrowserRouter>

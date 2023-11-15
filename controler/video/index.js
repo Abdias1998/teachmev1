@@ -20,7 +20,7 @@ const path = require("path");
 //       keywords,
 //     } = req.body;
 //     function backdrop_path() {
-//       return `${process.env.client_url}/image/backdrop_path/${director}`;
+//       return `${process.env.port}/image/backdrop_path/${director}`;
 //     }
 
 //     // Utilise la date actuelle pour générer un nom de fichier unique
@@ -40,7 +40,7 @@ const path = require("path");
 //       cast: [],
 //       videoUrl:
 //         req.file !== null
-//           ? `${process.env.client_url}/video/${req.file.originalname}`
+//           ? `${process.env.port}/video/${req.file.originalname}`
 //           : "",
 //       views: 0,
 //       coverImage: [],
@@ -80,7 +80,7 @@ module.exports.createPreach = async (req, res) => {
       keywords,
     } = req.body;
     function backdrop_path() {
-      return `${process.env.client_url}/image/backdrop_path/${director}`;
+      return `${process.env.port}/image/backdrop_path/${director}`;
     }
 
     const newPreach = new Preach({
@@ -95,7 +95,7 @@ module.exports.createPreach = async (req, res) => {
       cast: [],
       videoUrl:
         req.file !== undefined
-          ? `${process.env.client_url}/video/${req.file.originalname}`
+          ? `${process.env.port}/video/${req.file.originalname}`
           : "",
       views: 0,
       coverImage: [],
@@ -122,7 +122,7 @@ module.exports.createCoverImage = async (req, res) => {
     await video.updateOne({
       coverImage:
         req.file !== null
-          ? `${process.env.client_url}/image/cover_image/${req.file.originalname}`
+          ? `${process.env.port}/image/cover_image/${req.file.originalname}`
           : "",
     });
 

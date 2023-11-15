@@ -1,6 +1,8 @@
+import React from "react";
 import axios from "axios";
+
 // const api = "https://teachme-1xw7.onrender.com/v1";
-const api = "http://localhost:7200/v1/";
+const api = "http://localhost:7200/v1";
 
 const request = {
   register: `${api}/auth/register`,
@@ -20,11 +22,22 @@ export const getUser = async () => {
   const data = await res.data;
   return data;
 };
-export const getVideo = async (userId) => {
+export const getVideoUnWatched = async (userId) => {
   try {
-    const response = await axios.get(
-      `http://localhost:7200/v1/video/preach/unwatched/${userId}`
+    const response = await axios.get(`${request.video}/unwatched/${userId}`);
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des prédications non regardées:",
+      error
     );
+    throw error;
+  }
+};
+export const getVideo = async () => {
+  try {
+    const response = await axios.get(`${request.video}/read`);
     const data = await response.data;
     return data;
   } catch (error) {

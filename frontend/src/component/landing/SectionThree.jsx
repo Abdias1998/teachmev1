@@ -3,11 +3,11 @@ import React from "react";
 
 export const SectionThree = () => {
   return (
-    <div className=" mt-7 mb-6 " style={{ background: "#111" }}>
+    <div className=" mt-4 mb-6 " style={{ background: "#111" }}>
       <div className="w-full bg-black flex flex-column md:flex-row justify-content-around align-items-center align-content-start ">
         <div className="w-12  md:w-6 p-4 ">
           <h2 className=" "> Profitez-en sur votre téléviseur</h2>
-          <p className="mt-4 text-left text-sm ">
+          <p className="mt-4 text-left  ">
             Découvrez une expérience spirituelle inégalée des enseignements et
             prédications sur votre téléviseur. Plongez-vous dans la sagesse des
             hommes de Dieu les plus respectés d'Afrique et du monde entier,

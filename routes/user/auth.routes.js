@@ -26,7 +26,7 @@ router.put("/auth/reset/:token", authController.reset_password);
 
 // Ajouter une vidéo aux favoris
 router.post("/:userId/favorites/:videoId", user_no_auth.addToFavorites);
-
+ 
 // Obtenir la liste des vidéos favorites
 router.get("/:userId/favorites", user_no_auth.getFavorites);
 
