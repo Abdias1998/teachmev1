@@ -24,4 +24,26 @@ router.get("/users", user_no_auth.get_all_users);
 // Route for PUT request
 router.put("/auth/reset/:token", authController.reset_password);
 
+// Ajouter une vidéo aux favoris
+router.post("/:userId/favorites/:videoId", user_no_auth.addToFavorites);
+
+// Obtenir la liste des vidéos favorites
+router.get("/:userId/favorites", user_no_auth.getFavorites);
+
+// Ajouter une vidéo à "Regarder plus tard"
+router.post("/:userId/watch-later/:videoId", user_no_auth.addToWatchLater);
+
+// Obtenir la liste des vidéos "Regarder plus tard"
+router.get("/:userId/watch-later", user_no_auth.getWatchLater);
+
+// Ajouter une vidéo à la liste des vidéos vues
+router.post(
+  "/:userId/watched-videos/:videoId",
+  user_no_auth.addToWatchedVideos
+);
+
+// Obtenir la liste des vidéos vues
+router.get("/:userId/watched-videos", user_no_auth.getWatchedVideos);
+module.exports = router;
+
 module.exports = router;

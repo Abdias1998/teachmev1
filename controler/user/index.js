@@ -184,3 +184,143 @@ exports.getUserDeviceTypeStats = async (req, res) => {
     res.status(500).json({ error: "Une erreur s'est produite" });
   }
 };
+
+// Ajouter une vidéo aux favoris d'un utilisateur
+module.exports.addToFavorites = async (req, res) => {
+  const { userId, videoId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Vérifier si la vidéo est déjà dans les favoris
+    if (user.favorites.includes(videoId)) {
+      return res
+        .status(400)
+        .json({ message: "La vidéo est déjà dans les favoris." });
+    }
+
+    // Ajouter la vidéo aux favoris
+    user.favorites.push(videoId);
+    await user.save();
+
+    res
+      .status(200)
+      .json({ message: "La vidéo a été ajoutée aux favoris avec succès." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+// Obtenir la liste des vidéos favorites d'un utilisateur
+module.exports.getFavorites = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    res.status(200).json({ favorites: user.favorites });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+// Ajouter une vidéo à la liste "Regarder plus tard" d'un utilisateur
+module.exports.addToWatchLater = async (req, res) => {
+  const { userId, videoId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Vérifier si la vidéo est déjà dans "Regarder plus tard"
+    if (user.watchLater.includes(videoId)) {
+      return res
+        .status(400)
+        .json({ message: 'La vidéo est déjà dans "Regarder plus tard".' });
+    }
+
+    // Ajouter la vidéo à "Regarder plus tard"
+    user.watchLater.push(videoId);
+    await user.save();
+
+    res.status(200).json({
+      message: 'La vidéo a été ajoutée à "Regarder plus tard" avec succès.',
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+// Obtenir la liste des vidéos "Regarder plus tard" d'un utilisateur
+module.exports.getWatchLater = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    res.status(200).json({ watchLater: user.watchLater });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+// Ajouter une vidéo à la liste des vidéos vues d'un utilisateur
+module.exports.addToWatchedVideos = async (req, res) => {
+  const { userId, videoId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Ajouter la vidéo à la liste des vidéos vues
+    user.watchedVideos.push(videoId);
+    await user.save();
+
+    res
+      .status(200)
+      .json({ message: "La vidéo a été ajoutée aux vidéos vues avec succès." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+// Obtenir la liste des vidéos vues d'un utilisateur
+module.exports.getWatchedVideos = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    res.status(200).json({ watchedVideos: user.watchedVideos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};

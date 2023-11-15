@@ -1,5 +1,106 @@
+// import React from "react";
+// import "./index.css";
+// import { AiOutlineClockCircle, AiOutlineHeart } from "react-icons/ai";
+// const videos = [
+//   {
+//     id: 1,
+//     title: "Titre de la vidéo 1",
+//     description:
+//       "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail1.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid1",
+//   },
+//   {
+//     id: 2,
+//     title: "Titre de la vidéo 2",
+//     description:
+//       "Description de la vidéo 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail2.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid2",
+//   },
+//   {
+//     id: 3,
+//     title: "Titre de la vidéo 3",
+//     description:
+//       "Description de la vidéo 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail2.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid2",
+//   },
+//   {
+//     id: 4,
+//     title: "Titre de la vidéo 4",
+//     description:
+//       "Description de la vidéo 4. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail2.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid2",
+//   },
+//   {
+//     id: 5,
+//     title: "Titre de la vidéo 5",
+//     description:
+//       "Description de la vidéo 5. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail2.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid2",
+//   },
+//   {
+//     id: 6,
+//     title: "Titre de la vidéo 6",
+//     description:
+//       "Description de la vidéo 6. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+//     thumbnail: "https://example.com/thumbnail2.jpg",
+//     videoUrl: "https://www.youtube.com/watch?v=videoid2",
+//   },
+//   // Ajoute d'autres vidéos au besoin
+// ];
+
+// const VideoCard = ({ video }) => {
+//   return (
+//     <div className="card">
+//       <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">
+//         <img
+//           src={"./assets/large.webp"}
+//           alt={video.title}
+//           className="thumbnail"
+//         />
+//       </a>
+//       <div className="content">
+//         <h3>{video.title}</h3>
+//         <p>{video.description}</p>
+
+//         <div className="overlay">
+//           <div className="overlay-icons">
+//             <div className="tooltip">
+//               <AiOutlineClockCircle className="watch-later-icon" />
+//               <span class="tooltiptextlater">A Regarder plus tard</span>
+//             </div>
+//             <div className="tooltip">
+//               <AiOutlineHeart className="favorite-icon" />
+//               <span class="tooltiptextheart">Ajouter aux favoris</span>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     </div>
+//   );
+// };
+
+// const VideoList = () => {
+//   return (
+//     <div className="video-list">
+//       {videos.map((video) => (
+//         <VideoCard key={video.id} video={video} />
+//       ))}
+//     </div>
+//   );
+// };
+
+// export default VideoList;
+
 import React from "react";
 import "./index.css";
+import { AiOutlineClockCircle, AiOutlineHeart } from "react-icons/ai";
+import CircleLoader from "../circle-loader";
+
 const videos = [
   {
     id: 1,
@@ -11,72 +112,54 @@ const videos = [
   },
   {
     id: 2,
-    title: "Titre de la vidéo 2",
+    title: "Titre de la vidéo 1",
     description:
-      "Description de la vidéo 2. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid2",
+      "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    thumbnail: "https://example.com/thumbnail1.jpg",
+    videoUrl: "https://www.youtube.com/watch?v=videoid1",
   },
   {
     id: 3,
-    title: "Titre de la vidéo 3",
+    title: "Titre de la vidéo 1",
     description:
-      "Description de la vidéo 3. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid2",
+      "Description de la vidéo 1. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+    thumbnail: "https://example.com/thumbnail1.jpg",
+    videoUrl: "https://www.youtube.com/watch?v=videoid1",
   },
-  {
-    id: 4,
-    title: "Titre de la vidéo 4",
-    description:
-      "Description de la vidéo 4. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid2",
-  },
-  {
-    id: 5,
-    title: "Titre de la vidéo 5",
-    description:
-      "Description de la vidéo 5. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid2",
-  },
-  {
-    id: 6,
-    title: "Titre de la vidéo 6",
-    description:
-      "Description de la vidéo 6. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-    thumbnail: "https://example.com/thumbnail2.jpg",
-    videoUrl: "https://www.youtube.com/watch?v=videoid2",
-  },
-  // Ajoute d'autres vidéos au besoin
+  // ... autres vidéos
 ];
 
 const VideoCard = ({ video }) => {
   return (
-    <div className="card">
-      <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">
-        <img
-          src={"./assets/large.webp"}
-          alt={video.title}
-          className="thumbnail"
-        />
-      </a>
-      <div className="content">
-        <h3>{video.title}</h3>
-        <p>{video.description}</p>
-        <div className="overlay-buttons">
-          <button className="favorite-button">Add to Favorites</button>
-          <button className="watch-later-button">Watch Later</button>
-        </div>
-        <a
-          href={video.videoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="watch-button"
-        >
-          Watch Now
+    <div>
+      <h2 className="px-4 pt-4">Découvrez plus de vidéo de foi</h2>
+      <div className={`card`}>
+        <a href={video.videoUrl} target="_blank" rel="noopener noreferrer">
+          <img
+            src={"./assets/large.webp"}
+            alt={video.title}
+            className="thumbnail"
+          />
         </a>
+
+        <div className="content">
+          <>
+            <h3>{video.title}</h3>
+            <p>{video.description}</p>
+            <div className="overlay">
+              <div className="overlay-icons">
+                <div className="tooltip">
+                  <AiOutlineClockCircle className="watch-later-icon" />
+                  <span className="tooltiptextlater">A Regarder plus tard</span>
+                </div>
+                <div className="tooltip">
+                  <AiOutlineHeart className="favorite-icon" />
+                  <span className="tooltiptextheart">Ajouter aux favoris</span>
+                </div>
+              </div>
+            </div>
+          </>
+        </div>
       </div>
     </div>
   );

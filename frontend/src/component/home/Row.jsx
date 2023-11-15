@@ -4,7 +4,7 @@ import { movie } from "../../data/sliderImage";
 export const Row = ({ title, movie, isLarger }) => {
   return (
     <div>
-      <h2>{title}</h2>
+      <h2 className="px-4 pt-4">{title}</h2>
       <div className={`ov `}>
         {movie.map((el, index) => {
           return (

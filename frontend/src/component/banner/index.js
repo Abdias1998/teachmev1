@@ -85,7 +85,7 @@ import { AiFillPlayCircle } from "react-icons/ai";
 import { IoMdInformationCircleOutline } from "react-icons/io";
 import { medias } from "../../data/sliderImage";
 import { Button } from "primereact/button";
-
+import "./index.css";
 const baseUrl = "https://image.tmdb.org/t/p/original";
 
 const Banner = () => {
@@ -143,14 +143,9 @@ const Banner = () => {
             ? currentMedia?.description.slice(0, 300) + "..."
             : currentMedia?.description}
         </p>
-        {/* <button onClick={() => window.open(currentFilm.videoUrl, "_blank")}>
-          Lecture
-        </button> */}
+
         <br />
-        <Button
-          style={{ background: "#fff", color: "red" }}
-          label="Lire la vidéo"
-        />
+        <Button label="Lire la vidéo" className="watch-button" />
       </div>
     </div>
   );

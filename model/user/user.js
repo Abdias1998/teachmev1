@@ -52,6 +52,15 @@ const user_schema = mongoose.Schema(
     user_banned: {
       type: Boolean,
     },
+    favorites: {
+      type: [String],
+    },
+    watchLater: {
+      type: [String],
+    },
+    watchedVideos: {
+      type: [String],
+    },
     reporting: {
       type: [String],
     },

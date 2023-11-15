@@ -54,9 +54,10 @@ module.exports.register = async_handler(async (req, res) => {
       pseudo,
       email,
       password: hashed_password,
-      // deviceType,
-
-      reporting: ["gsgqgqdgqgdqd", "qfdsqdgqdsgdsg", "ggdsgqdgdgqdg"],
+      favorites: [],
+      watchLater: [],
+      watchedVideos: [],
+      reporting: [],
     });
     user.save();
     return res.status(200).json({ message: "Inscription réussie" });

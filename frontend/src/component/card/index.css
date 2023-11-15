@@ -1,6 +1,7 @@
 /* Style général de la carte */
 .card {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
+  position: relative;
   border-radius: 12px;
   overflow: hidden;
   margin: 16px;
@@ -10,19 +11,22 @@
 }
 
 .card:hover {
-  border: 1px solid #ddd;
+  /* border: 1px solid #ddd; */
   border-radius: 1px;
+  transform: scale(1.02);
 }
 
 /* Image de la miniature */
 .thumbnail {
   width: 100%;
-  height: auto;
+  height: 150px;
+  object-fit: cover;
 }
 
 /* Contenu de la carte */
 .content {
   padding: 16px;
+  /* position: relative; */
 }
 
 /* Titre de la vidéo */
@@ -31,27 +35,8 @@ h3 {
 }
 
 /* Description de la vidéo */
-p {
-  color: #666;
-}
 
 /* Bouton "Watch Now" */
-.watch-button {
-  display: block;
-  margin-top: 8px;
-  padding: 8px 16px;
-  background-color: #ff0000; /* Arrière-plan rouge */
-  color: #fff; /* Texte blanc */
-  text-decoration: none;
-  border-radius: 4px;
-  font-weight: bold;
-  text-align: center;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.watch-button:hover {
-  background-color: #cc0000; /* Rouge légèrement plus sombre au survol */
-}
 
 /* Utilisation de flex pour la disposition */
 .video-list {
@@ -69,3 +54,99 @@ p {
 }
 
 /* ... */
+/* ... */
+
+/* Style des boutons d'overlay (affichés au survol) */
+.overlay {
+  display: none; /* Initialement masqué */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2; /* Assure que les icônes apparaissent au-dessus du contenu */
+}
+
+/* Style des icônes "Regarder plus tard" et "Ajouter aux favoris" */
+.overlay-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.tooltip .tooltiptextlater,
+.tooltiptextheart {
+  visibility: hidden;
+  width: 120px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip:hover .tooltiptextlater {
+  visibility: visible;
+  opacity: 1;
+}
+.tooltip:hover .tooltiptextheart {
+  visibility: visible;
+  opacity: 1;
+}
+
+.watch-later-icon,
+.favorite-icon {
+  font-size: 44px;
+  color: #fff;
+  background-color: #333;
+  padding: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.watch-later-icon:hover,
+.favorite-icon:hover {
+  background-color: red;
+}
+
+/* Affiche les icônes d'overlay au survol de la carte */
+.card:hover .overlay {
+  display: flex;
+}
+
+/* ... */
+
+/* Ajoute ces styles à ton fichier CSS */
+
+.skeleton-list {
+  /* Styles pour une carte en mode squelette */
+  background-color: #f3f3f3;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.skeleton-thumbnail {
+  /* Styles pour l'image de la carte en mode squelette */
+  width: 100%;
+  height: 200px; /* Ajuste la hauteur selon tes besoins */
+  background-color: #ddd;
+}
+
+.skeleton-text {
+  /* Styles pour le texte de la carte en mode squelette */
+  margin-top: 10px;
+  background-color: #ddd;
+  height: 16px; /* Ajuste la hauteur selon tes besoins */
+  width: 80%; /* Ajuste la largeur selon tes besoins */
+}
+
+/* ... Ajoute d'autres styles au besoin */

@@ -2,6 +2,70 @@ const Preach = require("../../model/admin/preach/video_preach");
 const mongoose = require("mongoose");
 const User = require("../../model/user/user"); // Supposons que vous avez un modèle User
 const ObjectId = mongoose.Types.ObjectId;
+const fs = require("fs");
+const path = require("path");
+
+// ...
+
+// module.exports.createPreach = async (req, res) => {
+//   try {
+//     const {
+//       title,
+//       description,
+//       genre,
+//       releaseYear,
+//       director,
+//       cast,
+//       duration,
+//       keywords,
+//     } = req.body;
+//     function backdrop_path() {
+//       return `${process.env.client_url}/image/backdrop_path/${director}`;
+//     }
+
+//     // Utilise la date actuelle pour générer un nom de fichier unique
+//     const currentDate = new Date();
+//     const timestamp = currentDate.getTime();
+//     const fileName = `video_${timestamp}.mp4`; // Tu peux ajuster l'extension du fichier si nécessaire
+
+//     const newPreach = new Preach({
+//       title,
+//       description,
+//       keywords,
+//       genre,
+//       releaseYear,
+//       director,
+//       backdrop_path: backdrop_path(),
+//       duration,
+//       cast: [],
+//       videoUrl:
+//         req.file !== null
+//           ? `${process.env.client_url}/video/${req.file.originalname}`
+//           : "",
+//       views: 0,
+//       coverImage: [],
+//     });
+
+//     const preach = await newPreach.save();
+
+//     // // Renomme le fichier avec le nom généré
+//     // if (req.file !== null) {
+//     //   const filePath = path.join(
+//     //     __dirname,
+//     //     `../video/${req.file.originalname}`
+//     //   );
+//     //   const newFilePath = path.join(__dirname, `../video//${fileName}`);
+//     //   fs.renameSync(filePath, newFilePath);
+//     // }
+
+//     res.status(201).json({ preach, message: "Vidéo créée avec succès" });
+//   } catch (error) {
+//     res
+//       .status(500)
+//       .json({ error: "Erreur lors de la création de la vidéo" + error });
+//   }
+// };
+
 // Contrôleur pour la création d'un film
 module.exports.createPreach = async (req, res) => {
   try {
@@ -30,7 +94,7 @@ module.exports.createPreach = async (req, res) => {
       duration,
       cast: [],
       videoUrl:
-        req.file !== null
+        req.file !== undefined
           ? `${process.env.client_url}/video/${req.file.originalname}`
           : "",
       views: 0,
@@ -83,6 +147,34 @@ module.exports.readVideo = async (req, res) => {
         .status(500)
         .json({ error: "Erreur lors de la récupération des vidéos" });
     });
+};
+
+// Contrôleur pour récupérer les prédications non présentes dans les listes de l'utilisateur
+module.exports.getUnwatchedPreaches = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findById({ _id: req.params.userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Récupérer la liste des prédications de l'utilisateur
+    const watchedVideos = user.watchedVideos;
+    const watchLater = user.watchLater;
+    const favorites = user.favorites;
+
+    // Récupérer les prédications qui ne sont pas dans les listes de l'utilisateur
+    const unwatchedPreaches = await Preach.find({
+      _id: { $nin: [...watchedVideos, ...watchLater, ...favorites] },
+    });
+
+    res.status(200).json({ unwatchedPreaches });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
 };
 
 module.exports.viewsMiddleware = async (req, res) => {
