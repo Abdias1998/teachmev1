@@ -100,6 +100,8 @@ import React from "react";
 import "./index.css";
 import { AiOutlineClockCircle, AiOutlineHeart } from "react-icons/ai";
 import CircleLoader from "../circle-loader";
+import Favorite from "./favorite";
+import WatchLater from "./watchLater";
 
 const VideoCard = ({ video }) => {
   return (
@@ -119,14 +121,8 @@ const VideoCard = ({ video }) => {
             <p>{video.description}</p>
             <div className="overlay">
               <div className="overlay-icons">
-                <div className="tooltip">
-                  <AiOutlineClockCircle className="watch-later-icon" />
-                  <span className="tooltiptextlater">A Regarder plus tard</span>
-                </div>
-                <div className="tooltip">
-                  <AiOutlineHeart className="favorite-icon" />
-                  <span className="tooltiptextheart">Ajouter aux favoris</span>
-                </div>
+                <WatchLater videoId={video._id} />
+                <Favorite videoId={video._id} video={video} />
               </div>
             </div>
           </>

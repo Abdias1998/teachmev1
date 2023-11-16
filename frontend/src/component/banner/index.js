@@ -139,7 +139,7 @@ const Banner = ({ videos }) => {
           width: "90%", // ajuster la largeur selon vos besoins
         }}
       >
-        <h2>{currentMedia?.title}</h2>
+        <h1>{currentMedia?.title}</h1>
         <p>
           {currentMedia?.description.length >= 300
             ? currentMedia?.description.slice(0, 300) + "..."

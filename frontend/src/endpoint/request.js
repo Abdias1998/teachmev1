@@ -15,10 +15,25 @@ const request = {
 export default request;
 
 // Remplace cela par l'URL réelle de ton serveur
+export const addToFavorites = async (userId, videoId) => {
+  const res = await axios.post(`${api}/${userId}/favorites/${videoId}`);
+  const data = await res.data;
+  return data;
+};
 export const getUser = async () => {
   const res = await axios.get(`${request.user_info}`, {
     withCredentials: true,
   });
+  const data = await res.data;
+  return data;
+};
+export const getVideo55 = async () => {
+  const res = await axios.get(`${request.video}/videos/top55`);
+  const data = await res.data;
+  return data;
+};
+export const getVideoSubtitles = async () => {
+  const res = await axios.get(`${request.video}/videos/subtitles`);
   const data = await res.data;
   return data;
 };

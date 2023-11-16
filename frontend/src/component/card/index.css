@@ -116,6 +116,10 @@ h3 {
   background-color: red;
 }
 
+.watch-later-icon .add-favorite {
+  background-color: red;
+}
+
 /* Affiche les icônes d'overlay au survol de la carte */
 .card:hover .overlay {
   display: flex;

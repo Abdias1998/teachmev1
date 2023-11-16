@@ -78,6 +78,7 @@ module.exports.createPreach = async (req, res) => {
       cast,
       duration,
       keywords,
+      subtitle,
     } = req.body;
     function backdrop_path() {
       return `${process.env.port}/image/backdrop_path/${director}`;
@@ -94,11 +95,12 @@ module.exports.createPreach = async (req, res) => {
       duration,
       cast: [],
       videoUrl:
-        req.file !== undefined
+        req.file !== null
           ? `${process.env.port}/video/${req.file.originalname}`
           : "",
       views: 0,
       coverImage: [],
+      subtitle,
     });
 
     const preach = await newPreach.save();
@@ -226,6 +228,7 @@ module.exports.updatePreach = async (req, res) => {
     preach.director = director;
     preach.duration = duration;
     preach.keywords = keywords;
+    preach.keywords = subtitle;
 
     // Enregistrez les modifications
     const updatedPreach = await preach.save();
@@ -260,23 +263,31 @@ module.exports.deleteVideo = async (req, res) => {
     });
 };
 
-module.exports.getTop5Videos = async (req, res) => {
+module.exports.getTop55Videos = async (req, res) => {
   try {
-    const top5MostViewedVideos = await Preach.find({})
+    const top55MostViewedVideos = await Preach.find({})
       .sort({ views: -1 })
-      .limit(5);
+      .limit(55);
 
-    const top5MostCommentedVideos = await Preach.find({})
+    const top55MostCommentedVideos = await Preach.find({})
       .sort({ "comments.length": -1 })
-      .limit(5);
+      .limit(55);
 
     res.status(200).json({
-      mostViewed: top5MostViewedVideos,
-      mostCommented: top5MostCommentedVideos,
+      mostViewed: top55MostViewedVideos,
+      mostCommented: top55MostCommentedVideos,
     });
   } catch (error) {
     res
       .status(500)
       .json({ error: "Erreur lors de la récupération des vidéos " + error });
+  }
+};
+module.exports.getVideoSubtitle = async (req, res) => {
+  try {
+    const videos = await Preach.find({ subtitle: "true" });
+    res.json(videos);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 };

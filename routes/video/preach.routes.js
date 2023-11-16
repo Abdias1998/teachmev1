@@ -35,7 +35,8 @@ router.put(
 router.put("/update/:id", preach_controler.updatePreach);
 router.get("/read", preach_controler.readVideo);
 router.delete("/delete/:id", preach_controler.deleteVideo);
-router.get("/videos/top5", preach_controler.getTop5Videos);
+router.get("/videos/top55", preach_controler.getTop55Videos);
+router.get("/videos/subtitles", preach_controler.getVideoSubtitle);
 router.get("/unwatched/:userId", preach_controler.getUnwatchedPreaches);
 module.exports = router;
 // intext:"react" filetype:pdf

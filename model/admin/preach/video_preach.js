@@ -45,6 +45,7 @@ const preachSchema = new mongoose.Schema(
     subtitle: {
       type: String,
       default: "false",
+      required: true,
     },
     keywords: {
       type: String,
