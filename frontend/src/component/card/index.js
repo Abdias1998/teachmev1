@@ -96,7 +96,7 @@
 
 // export default VideoList;
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { AiOutlineClockCircle, AiOutlineHeart } from "react-icons/ai";
 import CircleLoader from "../circle-loader";
@@ -133,11 +133,31 @@ const VideoCard = ({ video }) => {
 };
 
 const VideoList = ({ videosUnWatched }) => {
+  const [loadVideo, setLoadVideo] = useState(true);
+  const [count, setCount] = useState(6);
+
+  const loadMore = () => {
+    if (
+      window.innerHeight + document.documentElement.scrollTop + 1 >
+      document.scrollingElement.scrollHeight
+    ) {
+      setLoadVideo(true);
+    }
+  };
+
+  useEffect(() => {
+    if (loadVideo) {
+      setCount(count + 5);
+      setLoadVideo(false);
+    }
+    window.addEventListener("scroll", loadMore);
+    return () => window.removeEventListener("scroll", loadMore);
+  }, [loadVideo, count]);
   return (
     <div>
       <h2 className="px-4 pt-4">Découvrez plus de vidéo de foi</h2>
       <div className="video-list">
-        {videosUnWatched?.map((video) => (
+        {videosUnWatched?.slice(0, count).map((video) => (
           <VideoCard key={video._id} video={video} />
         ))}
       </div>

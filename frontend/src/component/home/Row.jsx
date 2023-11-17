@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { movie } from "../../data/sliderImage";
+import { useEffect } from "react";
 
 export const Row = ({ title, getVideoMoreViews, subtiles, isLarger }) => {
   console.log("getVideoMoreViews", getVideoMoreViews);
+
   return (
     <div>
       <h2 className="px-4 pt-4">{title}</h2>

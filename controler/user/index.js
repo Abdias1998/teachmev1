@@ -1,4 +1,5 @@
 const User = require("../../model/user/user");
+const Preach = require("../../model/admin/preach/video_preach");
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const bcrypt = require("bcrypt");
@@ -196,6 +197,12 @@ module.exports.addToFavorites = async (req, res) => {
       return res.status(404).json({ message: "Utilisateur non trouvé." });
     }
 
+    // Vérifier si la longeur de la vidéo dépasse 10
+    if (user.favorites.length >= 10) {
+      return res
+        .status(400)
+        .json({ message: "Votre liste de favoris ne peut dépasser 10 vidéo" });
+    }
     // Vérifier si la vidéo est déjà dans les favoris
     if (user.favorites.includes(videoId)) {
       return res
@@ -228,6 +235,45 @@ module.exports.getFavorites = async (req, res) => {
     }
 
     res.status(200).json({ favorites: user.favorites });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+
+module.exports.getFavoritesVideos = async (req, res) => {
+  try {
+    // Récupérer l'utilisateur
+    const user = await User.findOne({ _id: req.params.userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Récupérer les vidéos à partir des IDs dans le tableau reporting
+    const favoritesVideos = await Preach.find({ _id: { $in: user.favorites } });
+
+    res.status(200).json({ favoritesVideos });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Erreur interne du serveur." });
+  }
+};
+module.exports.getwatchLaterVideos = async (req, res) => {
+  try {
+    // Récupérer l'utilisateur
+    const user = await User.findOne({ _id: req.params.userId });
+
+    if (!user) {
+      return res.status(404).json({ message: "Utilisateur non trouvé." });
+    }
+
+    // Récupérer les vidéos à partir des IDs dans le tableau reporting
+    const watchLaterVideos = await Preach.find({
+      _id: { $in: user.watchLater },
+    });
+
+    res.status(200).json({ watchLaterVideos });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Erreur interne du serveur." });

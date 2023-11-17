@@ -156,21 +156,56 @@ module.exports.getUnwatchedPreaches = async (req, res) => {
   const { userId } = req.params;
 
   try {
+    // Récupérer l'utilisateur
     const user = await User.findById({ _id: req.params.userId });
 
     if (!user) {
       return res.status(404).json({ message: "Utilisateur non trouvé." });
     }
 
-    // Récupérer la liste des prédications de l'utilisateur
-    const watchedVideos = user.watchedVideos;
-    const watchLater = user.watchLater;
-    const favorites = user.favorites;
+    // Fonction pour récupérer les réalisateurs les plus fréquents
+    const getTopDirectors = async (videoIds) => {
+      const directorCount = {};
 
-    // Récupérer les prédications qui ne sont pas dans les listes de l'utilisateur
+      for (const videoIdArray of [
+        user.favorites,
+        user.watchLater,
+        user.watchedVideos,
+      ]) {
+        const videos = await Preach.find({ _id: { $in: videoIdArray } });
+
+        videos.forEach((video) => {
+          const director = video.director;
+          // Vérifier si la propriété director existe et est une chaîne de caractères
+          if (director && typeof director === "string") {
+            directorCount[director] = (directorCount[director] || 0) + 1;
+          }
+        });
+      }
+
+      const sortedDirectors = Object.keys(directorCount).sort(
+        (a, b) => directorCount[b] - directorCount[a]
+      );
+
+      return sortedDirectors;
+    };
+
+    // Récupérer les réalisateurs les plus fréquents
+    const topDirectors = await getTopDirectors([
+      ...user.favorites,
+      ...user.watchLater,
+      ...user.watchedVideos,
+    ]);
+
+    // Récupérer les prédications dont les réalisateurs dominent dans les listes de l'utilisateur
     const unwatchedPreaches = await Preach.find({
-      _id: { $nin: [...watchedVideos, ...watchLater, ...favorites] },
-    });
+      director: { $in: topDirectors },
+      _id: {
+        $nin: [...user.watchedVideos, ...user.watchLater, ...user.favorites],
+      },
+    })
+      .sort({ views: -1 }) // Triez par le nombre de vues décroissant
+      .limit(Math.ceil(0.5 * topDirectors.length)); // Limitez le nombre de résultats à 50% des réalisateurs les plus fréquents
 
     res.status(200).json({ unwatchedPreaches });
   } catch (error) {
@@ -211,6 +246,7 @@ module.exports.updatePreach = async (req, res) => {
       cast,
       duration,
       keywords,
+      subtitles,
     } = req.body;
 
     // Recherchez la vidéo par son identifiant
@@ -228,7 +264,7 @@ module.exports.updatePreach = async (req, res) => {
     preach.director = director;
     preach.duration = duration;
     preach.keywords = keywords;
-    preach.keywords = subtitle;
+    preach.subtitles = subtitles;
 
     // Enregistrez les modifications
     const updatedPreach = await preach.save();

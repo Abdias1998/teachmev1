@@ -85,6 +85,9 @@ export const HomePage = () => {
         //  && videos?.length > 0
         <div>
           <Navbar />
+          <br />
+          <br />
+          <br />
           <Banner videos={videos} />
           <Row
             isLarger={true}

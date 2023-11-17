@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./endpoint/request";
 import { setGetUser } from "./features/userReducer";
+import LibrairiePage from "./pages/librairie/LibrairiePage";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ function App() {
           <Route path="/forget_password" element={<ForgetPasswordPage />} />
           <Route path="/reset/:token" element={<ResetPasswordPage />} />
           <Route exact path="/home" element={<HomePage />} />
+          <Route exact path="/my-library" element={<LibrairiePage />} />
         </Routes>
       </BrowserRouter>
     </>

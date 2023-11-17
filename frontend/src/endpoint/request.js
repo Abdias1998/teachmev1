@@ -50,6 +50,19 @@ export const getVideoUnWatched = async (userId) => {
     throw error;
   }
 };
+export const getFavorites = async (userId) => {
+  try {
+    const response = await axios.get(`${api}/users/${userId}/favorites-videos`);
+    const data = await response.data;
+    return data;
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des prédications non regardées:",
+      error
+    );
+    throw error;
+  }
+};
 export const getVideo = async () => {
   try {
     const response = await axios.get(`${request.video}/read`);
@@ -63,17 +76,3 @@ export const getVideo = async () => {
     throw error;
   }
 };
-export const getUnwatchedPreaches = async (userId) => {
-  try {
-    const response = await axios.get(`/preaches/unwatched/${userId}`);
-    return response.data.unwatchedPreaches;
-  } catch (error) {
-    console.error(
-      "Erreur lors de la récupération des prédications non regardées:",
-      error
-    );
-    throw error;
-  }
-};
-
-// Ajoute d'autres fonctions de requête ici

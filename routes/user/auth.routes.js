@@ -43,7 +43,12 @@ router.post(
 );
 
 // Obtenir la liste des vidéos vues
-router.get("/:userId/watched-videos", user_no_auth.getWatchedVideos);
-module.exports = router;
+// router.get("/:userId/watched-videos", user_no_auth.getWatchedVideos);
 
+router.get("/users/:userId/favorites-videos", user_no_auth.getFavoritesVideos);
+router.get(
+  "/users/:userId/watched-later-videos",
+  user_no_auth.getwatchLaterVideos
+);
+router.get("/users/:userId/watched-videos", user_no_auth.getWatchedVideos);
 module.exports = router;

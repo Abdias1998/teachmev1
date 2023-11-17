@@ -16,6 +16,14 @@ export default function Navbar({ user }) {
     setCloseMenu(!closeMenu);
   };
 
+  const pages = [
+    { menu: "Accueil", link: "/home" },
+    { menu: "Ma librairie", link: "/my-library" },
+    { menu: "Accueil", link: "/menu" },
+    { menu: "Accueil", link: "/menu" },
+    { menu: "Accueil", link: "/home" },
+  ];
+
   // useEffect(() => {
   //   const handleClickOutside = (event) => {
   //     const navbar = document.getElementById("navbar");
@@ -54,11 +62,9 @@ export default function Navbar({ user }) {
           "flex flex-column z-4 h-12 w-12 absolute top-100 bgColorActive"
         } hidden md:flex `}
       >
-        <NavLink></NavLink>
-        <NavLink>Accueil</NavLink>
-        <NavLink>Accueil</NavLink>
-        <NavLink>Accueil</NavLink>
-        <NavLink>Paramètre</NavLink>
+        {pages?.map((el) => {
+          return <NavLink to={el.link}>{el.menu}</NavLink>;
+        })}
       </div>
       {/* Profil de l'utilisateur */}
       <div style={{ left: "2rem" }} className="relative md:static px-4">

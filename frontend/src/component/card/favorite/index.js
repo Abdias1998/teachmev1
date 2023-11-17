@@ -1,35 +1,29 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
 import { AiOutlineHeart } from "react-icons/ai";
 import { addToFavorites } from "../../../endpoint/request";
 import { useSelector } from "react-redux";
 
+Modal.setAppElement("#root"); // Définissez l'élément racine de l'application pour react-modal
+
 export default function Favorite({ videoId, video }) {
-  const [addFavorite, setAddFavorite] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
   const user = useSelector((state) => state.user.user);
   const userId = user._id;
   const favorites = user?.favorites;
 
   const isVideoInFavorites = favorites.includes(videoId);
-  console.log(isVideoInFavorites, "isVideoInFavorites");
-  console.log(favorites, "favorites");
-  console.log(video, "videorecu");
 
-  // const handleToggleFavorite = () => {
-  //   if (isVideoInFavorites) {
-  //     // Si la vidéo est déjà dans les favoris, la retirer
-  //     setFavorites(favorites.filter((id) => id !== videoId));
-  //   } else {
-  //     // Si la vidéo n'est pas dans les favoris, l'ajouter
-  //     setFavorites([...favorites, videoId]);
-  //   }
-  // };
   const handleAddTofavorite = () => {
     addToFavorites(userId, videoId)
       .then((data) => {
-        console.log(data, "addfavorite");
+        setModalContent(data); // Mettez la réponse de la requête dans le state du modalContent
+        setModalIsOpen(true); // Ouvrez le modal
       })
       .catch((err) => {
-        console.log(err, "err favorite");
+        setModalContent(err.message || "Une erreur s'est produite"); // Mettez le message d'erreur dans le state du modalContent
+        setModalIsOpen(true); // Ouvrez le modal
       });
   };
 
@@ -37,6 +31,25 @@ export default function Favorite({ videoId, video }) {
     <div className="tooltip">
       <AiOutlineHeart onClick={handleAddTofavorite} className="favorite-icon" />
       <span className="tooltiptextheart">Ajouter aux favoris</span>
+
+      {/* Modal */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={() => setModalIsOpen(false)}
+        style={{
+          content: {
+            padding: "20px",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            color: "red",
+          },
+        }}
+      >
+        <h2>Réponse de la requête</h2>
+        <p>{modalContent}</p>
+        <button onClick={() => setModalIsOpen(false)}>Fermer</button>
+      </Modal>
     </div>
   );
 }
