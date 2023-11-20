@@ -7,6 +7,9 @@ export const SectionTwo = () => {
   function redirectToRegisterPage() {
     history("/register");
   }
+  function redirectToYoutube() {
+    window.open("https://www.youtube.com/@MoreofJesus-kb5uq", "_blank");
+  }
   return (
     <div
       className=" mb-6 w-full bg-black flex flex-column-reverse md:flex-row justify-content-between align-items-start mt-4"
@@ -28,10 +31,16 @@ export const SectionTwo = () => {
           gratuitement, explorez notre bibliothèque, et enrichissez votre vie
           spirituelle?
         </p>
-        <Button
+        {/* <Button
           style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
           className="block md:inline text-sm w-12 md:w-6 mt-4 h-2 "
           label="Commencer l'inscription"
+        /> */}
+        <Button
+          style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
+          onClick={redirectToYoutube}
+          className="block md:inline text-sm w-12 md:w-6 mt-4 h-2 "
+          label="Abonnée vous a notre chaîne YouTube."
         />
       </div>
     </div>

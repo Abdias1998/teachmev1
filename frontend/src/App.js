@@ -41,8 +41,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/forget_password" element={<ForgetPasswordPage />} />
           <Route path="/reset/:token" element={<ResetPasswordPage />} />
-          <Route exact path="/home" element={<HomePage />} />
-          <Route exact path="/my-library" element={<LibrairiePage />} />
+          {/* <Route exact path="/home" element={<HomePage />} /> */}
+          {/* <Route exact path="/my-library" element={<LibrairiePage />} /> */}
         </Routes>
       </BrowserRouter>
     </>

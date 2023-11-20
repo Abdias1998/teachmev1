@@ -74,7 +74,7 @@ module.exports.login = async (req, res) => {
       // secure: true,
     });
     return res.status(200).json({
-      message: `${admin}`,
+      message: `Connexion réussie`,
     });
   } catch (error) {
     res.status(500).json({ message: "Erreur de serveur" + error });

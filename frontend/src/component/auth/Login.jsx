@@ -75,7 +75,7 @@ export const Login = () => {
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.response.data.message);
+      showToast("error", "Error", error.message);
       console.log(error);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue

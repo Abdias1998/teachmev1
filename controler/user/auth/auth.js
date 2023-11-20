@@ -19,7 +19,7 @@ module.exports.register = async_handler(async (req, res) => {
         "Le nombre de caractère du pseudo doit être comprise entre 2 et 15",
     });
   if (!validator.isEmail(email))
-    return res.status(401).json({ message: "Saisissez un mail Valide" });
+    return res.status(401).json({ message: "Saisissez un mail valide" });
   if (!validator.isLength(password, { min: 4, max: 15 }))
     return res.status(401).json({
       message:
@@ -118,7 +118,7 @@ module.exports.login = async_handler(async (req, res) => {
         // secure: true,
       });
       return res.status(200).json({
-        message: `${existing_user}`,
+        message: `Connexion réussie`,
       });
     })
     .catch((err) => {

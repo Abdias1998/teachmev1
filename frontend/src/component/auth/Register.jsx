@@ -66,7 +66,7 @@ export const Register = () => {
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.response.data.message);
+      showToast("error", "Error", error.message);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue
     }
@@ -95,7 +95,6 @@ export const Register = () => {
           style={{ borderRadius: "50%" }}
           src="./assets/images/logo.png"
           alt=""
-          srcset=""
         />
         <h2 className="mt-4">Inscription</h2>
         <form
@@ -208,7 +207,7 @@ export const Register = () => {
           <Button
             type="submit"
             style={{ backgroundColor: "#E50913", color: "#fff" }}
-            className="m-6 w-6 text-sm md:text-lg mt-4 h-2 "
+            className="m-6 w-4 text-sm md:text-lg mt-4 h-2 "
             icon={isLoading ? "pi pi-spin pi-spinner" : ""}
             iconPos="right"
             label={isLoading ? "Chargement..." : "Envoyer"}

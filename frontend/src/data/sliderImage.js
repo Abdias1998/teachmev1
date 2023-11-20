@@ -42,31 +42,15 @@ export const dataImageSlider = [
   //     des: "Impact Centre Chrétien",
   //     text: "Sed in libero ut nibh placerat accumsan. Phasellus nec sem in justo pellentesque facilisis. Quisque malesuada placerat nisl.Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero.. Vivamus quis mi.",
   //   },
-  //   {
-  //     title: "Kumuyi William",
-  //     url: "./assets/pastor/kumuyi.jfif",
-  //     des: "The deeper life church",
-  //     text: "Sed in libero ut nibh placerat accumsan. Phasellus nec sem in justo pellentesque facilisis. Quisque malesuada placerat nisl.Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero.. Vivamus quis mi.",
-  //   },
+  {
+    title: "Kumuyi William",
+    url: "./assets/pastor/kumuyi.jfif",
+    des: "The deeper life church",
+    text: "Sed in libero ut nibh placerat accumsan. Phasellus nec sem in justo pellentesque facilisis. Quisque malesuada placerat nisl.Sed consequat, leo eget bibendum sodales, augue velit cursus nunc, quis gravida magna mi a libero.. Vivamus quis mi.",
+  },
 ];
 
 export const movie = [
-  {
-    url: "./assets/movie/film1.jfif",
-  },
-  {
-    url: "./assets/movie/film2.jfif",
-  },
-  {
-    url: "./assets/movie/film3.jfif",
-  },
-  {
-    url: "./assets/movie/film4.jfif",
-  },
-  {
-    url: "./assets/movie/film5.jfif",
-  },
-
   {
     url: "./assets/movie/film1.jfif",
   },

@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import React, { useRef, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 // import { Password } from "primereact/password";
 import axios from "axios";
 
@@ -12,10 +12,10 @@ import request from "../../endpoint/request";
 
 export const Forget = () => {
   const history = useNavigate();
-  const [isFormValid, setIsFormValid] = useState(false);
+
   const [validation, setValidation] = useState(false);
   // const [backendMessage, setBackendMessage] = useState("");
-  const [eye, setEye] = useState(true);
+
   const [isLoading, setIsLoading] = useState(false); // État pour le chargementz
   function redirectToRegister() {
     history("/register");
@@ -68,7 +68,7 @@ export const Forget = () => {
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.response.data.message);
+      showToast("error", "Error", error.message);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue
     }
@@ -81,8 +81,6 @@ export const Forget = () => {
       <small className="p-error">&nbsp;</small>
     );
   };
-
-  const passwordValue = useWatch({ control, name: "password" });
 
   return (
     <>
@@ -174,7 +172,7 @@ export const Forget = () => {
               <Button
                 type="submit"
                 style={{ backgroundColor: "#E50913", color: "#fff" }}
-                className="m-6 w-6 text-sm md:text-lg mt-4 h-2 "
+                className="m-6 w-4 text-sm md:text-lg mt-4 h-2 "
                 icon={isLoading ? "pi pi-spin pi-spinner" : ""}
                 iconPos="right"
                 label={isLoading ? "Chargement..." : "Envoyer"}

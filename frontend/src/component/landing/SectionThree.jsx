@@ -2,6 +2,12 @@ import { Button } from "primereact/button";
 import React from "react";
 
 export const SectionThree = () => {
+  function redirectTofacebook() {
+    window.open(
+      "https://www.facebook.com/profile.php?id=61553464604556",
+      "_blank"
+    );
+  }
   return (
     <div className=" mt-4 mb-6 " style={{ background: "#111" }}>
       <div className="w-full bg-black flex flex-column md:flex-row justify-content-around align-items-center align-content-start ">
@@ -20,6 +26,7 @@ export const SectionThree = () => {
             style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
             className="block md:inline ml-1 w-12 md:w-6 mt-4 md:h-2 h-1 text-sm  "
             label="Nous suivre sur Facebook"
+            onClick={redirectTofacebook}
           />
           <Button
             style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}

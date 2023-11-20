@@ -29,7 +29,7 @@ export const Heroes = () => {
     <div
       style={{
         position: "relative",
-        backgroundImage: "url('assets/images/fond.jpg')",
+        backgroundImage: "url('assets/images/fond.jfif')",
         backgroundPosition: "left center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
@@ -49,8 +49,22 @@ export const Heroes = () => {
           style={{ zIndex: "2", color: "#E50913" }}
           className="m-4 text-2xl md:text-4xl font-bold ml-6"
         >
-          Teach Me
+          <img
+            src="./assets/images/logo.jfif"
+            width={70}
+            height={70}
+            style={{ borderRadius: "100%", objectFit: "cover" }}
+            alt=""
+          />
         </h1>
+        {/* <p>
+          <Button
+            className="mr-6  text-sm md:text-md"
+            style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
+            label="Connexion"
+            onClick={redirectToLoginPage}
+          />
+        </p> */}
         <p>
           <Button
             className="mr-6  text-sm md:text-md"
@@ -61,20 +75,20 @@ export const Heroes = () => {
         </p>
       </div>
       <div className="flex flex-column justify-content-start align-items-center align-content-center mt-6">
-        <h1 className=" font-bold text-center m-4">
-          Découvrez l'Inspiration Divine : Vidéos Impactantes de Prédicateurs
-          Africains
-        </h1>
-        <h2
+        {/* <h1 className=" font-bold text-center m-4">
+          Exploration Profonde de la Parole de Dieu par les Prédicateurs
+          Renommés
+        </h1> */}
+        {/* <h2
           className=" text-center m-2
         "
         >
           Exploration Profonde de la Parole de Dieu par les Prédicateurs
           Africains Renommés{" "}
-        </h2>
-        <h3 className="text-center p-2 m-1">
+        </h2> */}
+        {/* <h3 className="text-center p-2 m-1">
           Regarder vos vidéos sans abonnement ni publicité
-        </h3>
+        </h3> */}
         <p style={{ zIndex: "2" }}>
           {/* <form onSubmit={handleSubmit}>
             <InputText
@@ -85,13 +99,13 @@ export const Heroes = () => {
               onChange={handleEmailChange}
             />
           </form> */}
-          <Button
+          {/* <Button
             type="submit"
             onClick={() => history("/register")}
             style={{ zIndex: "2", backgroundColor: "#E50913", color: "#fff" }}
             className="w-12 text-sm md:text-lg mt-4 h-2 "
             label="Commencer l'inscription"
-          />
+          /> */}
         </p>
       </div>
       <div
@@ -103,7 +117,7 @@ export const Heroes = () => {
           width: "100%",
           height: "100%",
           background:
-            "linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))",
+            "linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, .1), rgba(0, 0, 0, 1))",
         }}
         className="overlay"
       ></div>

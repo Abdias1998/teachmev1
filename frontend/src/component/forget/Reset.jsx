@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import React, { useRef, useState } from "react";
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 // import { Password } from "primereact/password";
 import axios from "axios";
 import { classNames } from "primereact/utils";
@@ -21,9 +21,7 @@ export const Reset = () => {
   function redirectToForget() {
     history("/forget_password");
   }
-  function redirectToRegister() {
-    history("/register");
-  }
+
   const toast = useRef(null);
 
   const show = () => {
@@ -79,7 +77,7 @@ export const Reset = () => {
       }
     } catch (error) {
       // setBackendMessage(error.message);
-      showToast("error", "Error", error.response.data.message);
+      showToast("error", "Error", error.message);
       console.log(error);
     } finally {
       setIsLoading(false); // Désactiver le chargement une fois la réponse obtenue
@@ -93,8 +91,6 @@ export const Reset = () => {
       <small className="p-error">&nbsp;</small>
     );
   };
-
-  const passwordValue = useWatch({ control, name: "password" });
 
   return (
     <div
@@ -204,6 +200,13 @@ export const Reset = () => {
             disabled={!isFormValid || isLoading}
           />
         </form>
+        <h5
+          style={{ cursor: "pointer" }}
+          className="text-center underline"
+          onClick={redirectToForget}
+        >
+          Retour
+        </h5>
       </div>
     </div>
   );
