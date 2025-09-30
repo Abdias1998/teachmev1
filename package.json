@@ -7,6 +7,10 @@
     "test": "jest",
     "start": "nodemon index.js"
   },
+  "engines": {
+  "node": ">=18 <21"
+}
+,
   "keywords": [],
   "author": "",
   "license": "ISC",
